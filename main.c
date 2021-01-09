@@ -76,7 +76,7 @@ int render_next_frame(t_data *img)
   return (0);
 }
 
-int main(void)
+/*int main(void)
 {
   t_mlx_id mlx_id;
   t_data img;
@@ -97,4 +97,53 @@ int main(void)
   img.win = mlx_id.mlx_win;
   mlx_loop_hook(mlx_id.mlx_ptr, render_next_frame, &img);
   mlx_loop(mlx_id.mlx_ptr);// A loop to keep the connection up
+}*/
+
+int ft_parsing(char *str, t_get *get)
+{
+	
+}
+
+int cub3d(char *str, t_get *get)
+{
+	int			i;
+
+	i = 0;
+	while (str[i] != '\0')
+		i++;
+	while (str[i] != '.')
+	{
+		i--;
+		if (i == 0)
+		{
+			ft_error(get, "Map's name invalid\n");
+			return (0);
+		}
+	}
+	if (str[i + 1] == 'c' && str[i + 2] == 'u' && str[i + 3] == 'b')
+		ft_parsing(str, get);
+	else
+		ft_error(get, "Map's name invalid\n"); // fonction qui renvoi un message d'erreur et free ce qui a ete allouer par ft_init
+	return (0);
+}
+
+void ft_init(t_get *get)
+{
+	/* on initialise les variables*/
+	get->save == 0;
+}
+
+int main(int ac, char** av)
+{
+  t_get get;
+
+	ft_init(&get);
+	if (ac == 2 || (ac == 3 && ft_check_save(av[2]) == 1))
+	{
+		if (argc == 3)
+			get.save = 1;
+		ft_cub3d(av[1], &get);
+	}
+	else
+		write(1, "Invalid args\n", 12);
 }

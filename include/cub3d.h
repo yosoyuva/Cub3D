@@ -24,3 +24,8 @@ typedef struct  s_mystruct
     int         area;
     char        qwerty;
 }               t_mystruct;
+
+typedef struct  s_get
+{
+    int save;
+}               t_get;
