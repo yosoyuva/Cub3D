@@ -29,3 +29,9 @@ typedef struct  s_get
 {
     int save;
 }               t_get;
+
+int ft_parsing(char *file, t_get *get);
+void ft_error(t_get *get, char *str);
+int cub3d(char *str, t_get *get);
+void ft_init(t_get *get);
+int ft_get_info_check_errors(char *file, t_get *get);

@@ -99,9 +99,29 @@ int render_next_frame(t_data *img)
   mlx_loop(mlx_id.mlx_ptr);// A loop to keep the connection up
 }*/
 
-int ft_parsing(char *str, t_get *get)
+int ft_get_info_check_errors(char *file, t_get *get)
 {
-	
+	int fd;
+	int ret;
+	char *read
+
+	ret = 1;
+	if ((fd = open(file, O_DIRECTORY)) != -1)
+		ft_error(get, "Invalid : is a directory\n");
+	if ((fd = open(file, O_RDONLY)) == -1)
+		ft_error(get, "Invalid .cub file\n");
+	while (read != 0)
+	{
+		ret = get_next_line(fd, &read, get);
+		if (error en parsing)
+			ft_error(get, "error while parsing");
+		/* check les differentes information dans la map (resolution, color, texture, map ...) */
+		free(read);
+	}
+	close(fd);
+	//if()
+	/* check si la map n'est pas vide */
+	ft_parsing(file, get);
 }
 
 int cub3d(char *str, t_get *get)
@@ -121,7 +141,7 @@ int cub3d(char *str, t_get *get)
 		}
 	}
 	if (str[i + 1] == 'c' && str[i + 2] == 'u' && str[i + 3] == 'b')
-		ft_parsing(str, get);
+		ft_get_info_check_errors(str, get);
 	else
 		ft_error(get, "Map's name invalid\n"); // fonction qui renvoi un message d'erreur et free ce qui a ete allouer par ft_init
 	return (0);
