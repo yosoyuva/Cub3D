@@ -99,7 +99,7 @@ int render_next_frame(t_data *img)
   mlx_loop(mlx_id.mlx_ptr);// A loop to keep the connection up
 }*/
 
-int ft_get_info_check_errors(char *file, t_get *get)
+int ft_parsing_check_errors(char *file, t_get *get)
 {
 	int fd;
 	int ret;
@@ -112,10 +112,19 @@ int ft_get_info_check_errors(char *file, t_get *get)
 		ft_error(get, "Invalid .cub file\n");
 	while (read != 0)
 	{
+		/* mettre la next line de la map dans read */
 		ret = get_next_line(fd, &read, get);
 		if (error en parsing)
 			ft_error(get, "error while parsing");
 		/* check les differentes information dans la map (resolution, color, texture, map ...) */
+		/* 1)- La map doit etre compose d'uniquement de : 0(espace vide), 1(murs), 2(objet) et N, S, E ou W(pour la position de depart du joueur)
+			 2)- La map doit etre ferme (entoure de 1(murs))
+			 3)- Mis à part la description de la map, chaque type d’élément peut être séparéepar une ou plusieurs lignes vides
+			 4)- La description de la carte sera toujours en dernier dans le fichier, le reste deséléments peut être dans n’importe quel ordre.
+			 5)- Sauf pour la map elle-même, les informations de chaque élément peuvent êtreséparées par un ou plusieurs espace(s)
+			 6)- La description de la map n'est pas forcement carree tant qu'elle est ferme par des murs ca passe
+			 7)- Pour chaque élement, le premier caractère est l’identifiant (un ou deux carac-tères : R, NO, SO, WE, EA, S, F, C), suivi de toutes les informations spécifiques à l’élément dans l'ordre (avec un ou plusieurs espaces entre eux)
+		*/
 		free(read);
 	}
 	close(fd);
@@ -141,7 +150,7 @@ int cub3d(char *str, t_get *get)
 		}
 	}
 	if (str[i + 1] == 'c' && str[i + 2] == 'u' && str[i + 3] == 'b')
-		ft_get_info_check_errors(str, get);
+		ft_parsing_check_errors(str, get);
 	else
 		ft_error(get, "Map's name invalid\n"); // fonction qui renvoi un message d'erreur et free ce qui a ete allouer par ft_init
 	return (0);
