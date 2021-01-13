@@ -35,6 +35,20 @@ typedef struct  s_mystruct
 
 typedef struct  s_get
 {
+    int rx;//resolution
+    int ry;
+    char *no;// chemin vers la texture nord
+    char *so;
+    char *we;
+    char *ea;
+    char *s;// chemin vers le sprite
+    int f;// couleur du resolution
+    int c;// couleur du plafond
+    /* error = 0 ==> pas d'erreur
+       error = 7 ==> erreur au niveau de la resolution  
+       error = 71 ==> resolution apparu plus d'une fois sur le fichier description .cub
+     */
+    int error; // initialement a 0
     int save;
 }               t_get;
 

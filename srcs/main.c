@@ -1,4 +1,4 @@
-#include "include/cub3d.h"
+#include "../include/cub3d.h"
 
 int		create_trgb(int t, int r, int g, int b)
 {
@@ -125,6 +125,7 @@ int ft_parsing_check_errors(char *file, t_get *get)
 			 6)- La description de la map n'est pas forcement carree tant qu'elle est ferme par des murs ca passe
 			 7)- Pour chaque élement, le premier caractère est l’identifiant (un ou deux carac-tères : R, NO, SO, WE, EA, S, F, C), suivi de toutes les informations spécifiques à l’élément dans l'ordre (avec un ou plusieurs espaces entre eux)
 		*/
+		ft_get_cub_info(file, get, &read);
 		free(read);
 	}
 	close(fd);
