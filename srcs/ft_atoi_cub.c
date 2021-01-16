@@ -28,6 +28,8 @@ int		ft_atoi_cub(const char *str, int *i)
 	*i = ft_iswhite_space(i, str);
 	if (ft_issign(i, str))
 		return (-1);
+	if (str[*i] < '0' || str[*i] > '9')
+		return (-1);
 	while (str[*i] >= '0' && str[*i] <= '9')
 	{
 		if ((res > INT_MAX / 10) || (res == INT_MAX / 10 && str[*i] - 48 > 7))

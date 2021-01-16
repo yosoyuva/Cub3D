@@ -21,9 +21,42 @@ int		create_rgb(int r, int g, int b)
 	return(r << 24 | g << 16 | b << 8);
 }
 
-int ft_check_comas(char *str, int *i)
+int ft_check_comma(char *str, int *i)
 {
-  
+  int comma;
+  int j;
+
+  comma = 0;
+  j = *i;
+  while(str[j])
+  {
+    if (str[j] == ',')
+      comma++;
+    j++;
+  }
+  if (comma == 2)
+    return (0);
+  return (1);
+}
+
+int ft_check_color_range(char *str, int *i)
+{
+  int j;
+  int n;
+
+  j = *i;
+  n = ft_atoi_cub(str, &j);
+  if ((n > 255 || n < 0 ) && str[j] != ',')
+    return (1);
+  j++;
+  n = ft_atoi_cub(str, &j);
+  if ((n > 255 || n < 0 ) && str[j] != ',')
+    return (1);
+  j++;
+  n = ft_atoi_cub(str, &j);
+  if (n > 255 || n < 0)
+    return (1);
+  return (0);
 }
 
 int ft_atoi_cub_color(char *str, int *i)
@@ -34,7 +67,7 @@ int ft_atoi_cub_color(char *str, int *i)
   if (!str)
     return (-1);
   *i = ft_iswhite_space(i, str);
-  if (ft_check_comas(str, i) && ft_check_color_range(str, i))
+  if (ft_check_comma(str, i) && ft_check_color_range(str, i))
     return (-1);
   res = ft_create_rgb(ft_atoi_cub(str, i), ft_atoi_cub(str, i), ft_atoi_cub(str, i));
   return (res);
