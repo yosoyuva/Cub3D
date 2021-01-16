@@ -45,7 +45,7 @@ typedef struct  s_get
     int f;// couleur du resolution
     int c;// couleur du plafond
     /* error = 0 ==> pas d'erreur
-       error = 7 ==> erreur au niveau de la resolution  
+       error = 7 ==> erreur au niveau de la resolution
        error = 71 ==> resolution apparu plus d'une fois sur le fichier description .cub
      */
     int error; // initialement a 0
@@ -78,5 +78,15 @@ char	*ft_strcat(char *s1, const char *s2);
 int		ft_new_line(char **s, char **line, int fd, int ret);
 void	ft_strdel(char **as);
 /* get_next_line function stop */
+void ft_texture_no(t_get *get, char *read, int *i);
+void ft_texture_so(t_get *get, char *read, int *i);
+void ft_texture_we(t_get *get, char *read, int *i);
+void ft_texture_ea(t_get *get, char *read, int *i);
+void ft_texture_sprite(t_get *get, char *read, int *i);
+void ft_resolution(t_get *get, char *read, int *i);
+void ft_color_floor(t_get *get, char *read, int *i);
+void ft_color_ceiling(t_get *get, char *read, int *i);
+int		ft_iswhite_space(int *i, const char *str);
+int		ft_atoi_cub(const char *str, int *i);
 
 #endif

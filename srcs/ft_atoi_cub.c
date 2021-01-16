@@ -9,41 +9,33 @@ int		ft_iswhite_space(int *i, const char *str)
 	return (*i);
 }
 
-int		ft_issign(int *i, const char *str, int *sign)
+int		ft_issign(int *i, const char *str)
 {
 	if (str[*i] == '-' || str[*i] == '+')
 	{
-		if (str[*i] == '-')
-			*sign *= -1;
-		(*i)++;
+		return (1);
 	}
-	return (*i);
+	return (0);
 }
 
 int		ft_atoi_cub(const char *str, int *i)
 {
-	//int	i;
-	//int	sign;
 	int	res;
 
-	//sign = 1;
-	//i = 0;
 	res = 0;
+	if (!str)
+    return (-1);
 	*i = ft_iswhite_space(i, str);
-	if (ft_issign(i, str, &sign);
+	if (ft_issign(i, str))
+		return (-1);
 	while (str[*i] >= '0' && str[*i] <= '9')
 	{
 		if ((res > INT_MAX / 10) || (res == INT_MAX / 10 && str[*i] - 48 > 7))
 		{
-			if (sign == 1)
-				return (INT_MAX);
-			else if (res * sign == INT_MIN / 10 && str[*i] - 48 > 7)
-				return (INT_MIN);
-			else
-				return (0);
+			return (INT_MAX);
 		}
 		res = res * 10 + (str[*i] - 48);
-		i++;
+		(*i)++;
 	}
 	return (res);
 }

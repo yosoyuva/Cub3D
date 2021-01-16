@@ -8,28 +8,6 @@ int ft_rest_is_wspace(char *str, int *i)
   return (1);
 }
 
-
-/* recuperer la resolution depuis read (ligne du .cup renvoyer par get_next_line) */
-void ft_resolution(t_get *get, char *read, int *i)
-{
-  /* d'abord checker si rx et ry n'ont pas recu de valeur sinon t_get error = 7 (la map a une resolution assigne plus d'une fois)*/
-  if (get->rx == 0 && get->ry == 0)
-  {
-    (*i)++;
-    get->rx = ft_atoi_cub(read, i);
-    get->ry = ft_atoi_cub(read, i);
-    if (get->rx == 0 || get->ry == 0 || !ft_rest_is_wspace(read, i))
-      get->error = 7;
-  }
-  else
-    get->error = 71;
-}
-
-void ft_texture_no(t_get *get, char *read, int *i)
-{
-  
-}
-
 void ft_get_cub_info(char *file, t_get *get, char *read)
 {
   int i;
@@ -40,8 +18,8 @@ void ft_get_cub_info(char *file, t_get *get, char *read)
     if (read[i] == '\n')
      break ;
     ft_iswhite_space(&i, read);
-    while (read[i] == ' ')
-      i++;
+    //while (read[i] == ' ')
+    //  i++;
     if (read[i] == 'R')
       ft_resolution(get, read, &i);
     if (read[i] == 'N' && read[i + 1] == 'O')
@@ -58,6 +36,5 @@ void ft_get_cub_info(char *file, t_get *get, char *read)
       ft_color_floor(get, read, &i);
     if (read[i] == 'C')
       ft_color_ceiling(get, read, &i);
-
   }
 }
