@@ -69,7 +69,7 @@ int ft_atoi_cub_color(char *str, int *i)
   *i = ft_iswhite_space(i, str);
   if (ft_check_comma(str, i) && ft_check_color_range(str, i))
     return (-1);
-  res = ft_create_rgb(ft_atoi_cub(str, i), ft_atoi_cub(str, i), ft_atoi_cub(str, i));
+  res = ft_create_rgb(ft_atoi_cub(str, i), ft_atoi_cub(str, i + 1), ft_atoi_cub(str, i + 1));
   return (res);
 }
 
@@ -78,7 +78,7 @@ void ft_color_floor(t_get *get, char *read, int *i)
   if (get->f == -1)
   {
     (*i)++;
-    get->f =
+    get->f = ft_atoi_cub_color(read, i);
     if (get->f == -1 || !ft_rest_is_wspace(read, i))
       get->error = 8;
   }
@@ -91,6 +91,7 @@ void ft_color_ceiling(t_get *get, char *read, int *i)
   if (get->c == -1)
   {
     (*i)++;
+    get->c = ft_atoi_cub_color(read, i);
     if (get->c == -1 || !ft_rest_is_wspace(read, i))
       get->error = 9;
   }
