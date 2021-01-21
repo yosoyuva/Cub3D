@@ -36,5 +36,7 @@ void ft_get_cub_info(char *file, t_get *get, char *read)
       ft_color_floor(get, read, &i);
     if (read[i] == 'C')
       ft_color_ceiling(get, read, &i);
+    /* recuperer les info de la map creer un tableau de tableau que je remplirai ligne par ligne en fonction de ce qui est lu par get_next_line */
+    
   }
 }

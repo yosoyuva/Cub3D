@@ -115,7 +115,10 @@ int ft_parsing_check_errors(char *file, t_get *get)
 		/* mettre la next line de la map dans read */
 		ret = get_next_line(fd, &read, get);
 		if (get->error > 0/*error en parsing*/)
+		{
+			free(read);
 			ft_error(get, "error while parsing");
+		}
 		/* check les differentes information dans la map (resolution, color, texture, map ...) */
 		/* 1)- La map doit etre compose d'uniquement de : 0(espace vide), 1(murs), 2(objet) et N, S, E ou W(pour la position de depart du joueur)
 			 2)- La map doit etre ferme (entoure de 1(murs))
@@ -127,6 +130,8 @@ int ft_parsing_check_errors(char *file, t_get *get)
 		*/
 		ft_get_cub_info(file, get, &read);
 		free(read);
+		if (get->error > 0)
+			ft_error(get, "error in getting map info");
 	}
 	close(fd);
 	//if()

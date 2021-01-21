@@ -3,6 +3,8 @@
 /* recuperer la resolution depuis read (ligne du .cup renvoyer par get_next_line) */
 void ft_resolution(t_get *get, char *read, int *i)
 {
+  /*if (data de map no NULL)
+      get->error = 6;*/
   /* d'abord checker si rx et ry n'ont pas recu de valeur sinon t_get error = 7 (la map a une resolution assigne plus d'une fois)*/
   if (get->rx == 0 && get->ry == 0)
   {
@@ -75,6 +77,8 @@ int ft_atoi_cub_color(char *str, int *i)
 
 void ft_color_floor(t_get *get, char *read, int *i)
 {
+  /*if (data de map no NULL)
+      get->error = 6;*/
   if (get->f == -1)
   {
     (*i)++;
@@ -88,6 +92,8 @@ void ft_color_floor(t_get *get, char *read, int *i)
 
 void ft_color_ceiling(t_get *get, char *read, int *i)
 {
+  /*if (data de map no NULL)
+      get->error = 6;*/
   if (get->c == -1)
   {
     (*i)++;
