@@ -37,6 +37,17 @@ void ft_get_cub_info(char *file, t_get *get, char *read)
     if (read[i] == 'C')
       ft_color_ceiling(get, read, &i);
     /* recuperer les info de la map creer un tableau de tableau que je remplirai ligne par ligne en fonction de ce qui est lu par get_next_line */
-    
+    if (ft_is_map(get, read, &i))
+      ft_map(get, read, &i);
   }
+}
+
+int ft_is_map(t_get *get, char *str, int *i)
+{
+
+}
+
+int ft_map(t_get *get, char *str, int *i)
+{
+
 }
