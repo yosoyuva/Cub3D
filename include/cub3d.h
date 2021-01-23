@@ -50,6 +50,9 @@ typedef struct  s_get
      */
     int error; // initialement a 0
     int save;
+    int nblines;
+    int linesize;
+    char **map;
 }               t_get;
 
 /* get_next_line struct */

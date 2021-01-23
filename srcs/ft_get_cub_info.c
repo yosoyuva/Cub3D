@@ -42,12 +42,72 @@ void ft_get_cub_info(char *file, t_get *get, char *read)
   }
 }
 
-int ft_is_map(t_get *get, char *str, int *i)
+int ft_is_map(char *str, int *i)
 {
-
+  if (str[*i] != ' ' && str[*i] != '0' && str[*i] != '1' \
+      && str[*i] != '2' && str[*i] != 'N' && str[*i] != 'S' \
+      && str[*i] != 'E' && str[*i] != 'W' && str[*i] != '\n'
+      && str[*i] != '\t')
+  {
+    return (0);
+  }
+  return (1);
 }
 
 int ft_map(t_get *get, char *str, int *i)
 {
+  if (str[*i] != '1')
+  {
+    get->error = 2;
+    return (0);
+  }
+  while (ft_is_map(str, i))
+  {
+    if (str[*i] = ' ')
+    {
+      if (str[*i - 1] != '1')
+        get->error = 2;
+      while (str[*i] == ' ')
+        (*i)++;
+      if (str[*i] != '1' && str[*i] != '\n' && str[*i] != '\0')
+        get->erro = 2;
+    }
+    (*i)++;
+  }
+  if (str[*i] != '\0')
+  {
+   get->error = 2;
+    return (0);
+  }
+  if (ft_strlen(str) > get->linesize)
+    get->linesize = ft_strlen(str);
+  get->nblines = get->nblines + 1;
+  return (1);
+}
 
+int ft_copy_map(char *file, char *read, t_get *get)
+{
+  int fd;
+  int ret;
+  int i;
+
+  ret = 1;
+  i = 0;
+  fd = open(file, O_RDONLY);
+  if (!(get->map = malloc(sizeof(char*) * get->nblines)))
+		return (0);
+  while (i <= get->nblines)
+  {
+    if (!(get->map[i] = malloc(sizeof(char*) * get->linesize)))
+  		return (0);
+  }
+  while (ret != 0)
+	{
+		ret = get_next_line(fd, read, get);
+    if (/*condition : c'est une ligne de map */)
+    {
+      
+    }
+	}
+	close(fd);
 }

@@ -110,7 +110,7 @@ int ft_parsing_check_errors(char *file, t_get *get)
 		ft_error(get, "Invalid : is a directory\n");
 	if ((fd = open(file, O_RDONLY)) == -1)
 		ft_error(get, "Invalid .cub file\n");
-	while (read != 0)
+	while (ret != 0)
 	{
 		/* mettre la next line de la map dans read */
 		ret = get_next_line(fd, &read, get);
@@ -134,9 +134,11 @@ int ft_parsing_check_errors(char *file, t_get *get)
 			ft_error(get, "error in getting map info");
 	}
 	close(fd);
-	//if()
+	//if(get->nblines == 0 || get->linesize == 0)
+	// ft_error(get, "no map");
 	/* check si la map n'est pas vide */
-	ft_parsing(file, get);
+	ft_copy_map(file, read, get);
+	//ft_parsing(file, get);
 }
 
 int cub3d(char *str, t_get *get)
