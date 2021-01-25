@@ -1,5 +1,41 @@
 #include "../include/cub3d.h"
 
+/*int ft_walls(t_get *get)
+{
+}
+*/
+
+int ft_n_player(t_get *get)
+{
+  int i;
+  int j;
+  int pos;
+
+  i = 0;
+  j = 0;
+  pos = 0;
+  while (get->map[i])
+  {
+    j = 0;
+    while (get->map[i][j])
+    {
+      if ((get->map[i][j] == 'N')  || (get->map[i][j] == 'S') || (get->map[i][j] == 'W') || (get->map[i][j] == 'E'))
+        pos++;
+      j++;
+    }
+  }
+  return (pos);
+}
+
+void ft_verify(t_get *get)
+{
+/* deja fait lors du parsing*/
+  //if (ft_walls(get))
+  //  ft_error(get, "map is not close");
+  if (ft_n_player(get) != 1)
+    ft_error(get, "more or less than one player");
+}
+
 void ft_error(t_get *get, char *str)
 {
 	/* fonction qui renvoi un message d'erreur et free ce qui a ete allouer par ft_init */

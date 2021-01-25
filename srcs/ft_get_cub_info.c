@@ -37,12 +37,14 @@ void ft_get_cub_info(char *file, t_get *get, char *read)
     if (read[i] == 'C')
       ft_color_ceiling(get, read, &i);
     /* recuperer les info de la map creer un tableau de tableau que je remplirai ligne par ligne en fonction de ce qui est lu par get_next_line */
-    if (ft_is_map(get, read, &i))
+    if (read[i] == '1')
       ft_map(get, read, &i);
+    if (read[i] == '\n' && (get->linesize > 0 || get->nblines > 0))
+      ft_error(get, "line feed on map desciption");
   }
 }
 
-int ft_is_map(char *str, int *i)
+int ft_is_char_map(char *str, int *i)
 {
   if (str[*i] != ' ' && str[*i] != '0' && str[*i] != '1' \
       && str[*i] != '2' && str[*i] != 'N' && str[*i] != 'S' \
@@ -54,6 +56,7 @@ int ft_is_map(char *str, int *i)
   return (1);
 }
 
+/* check si de dexiption de map est conforme (sinon get-error = 2) et recupere le nombre de ligne et la taille de la plus grande*/
 int ft_map(t_get *get, char *str, int *i)
 {
   if (str[*i] != '1')
@@ -61,7 +64,7 @@ int ft_map(t_get *get, char *str, int *i)
     get->error = 2;
     return (0);
   }
-  while (ft_is_map(str, i))
+  while (ft_is_char_map(str, i))
   {
     if (str[*i] = ' ')
     {
@@ -101,13 +104,33 @@ int ft_copy_map(char *file, char *read, t_get *get)
     if (!(get->map[i] = malloc(sizeof(char*) * get->linesize)))
   		return (0);
   }
+  get->map[i][0] = '\0';
+  i = 0;
   while (ret != 0)
 	{
 		ret = get_next_line(fd, read, get);
-    if (/*condition : c'est une ligne de map */)
+    if (ft_is_map(read)/*condition : c'est une ligne de map */)
     {
-      
+      ft_copy_map_aux(read, &(get->map[i]);
+      i++;
     }
 	}
 	close(fd);
+  ft_verify(get);
+}
+
+void ft_copy_map_aux(char *str, char *map)
+{
+  int i;
+
+  i = 0;
+  while (str[i])
+  {
+    if (str[i] = ' ')
+      map[i] = '1';
+    else
+      map[i] = str[i];
+    i++;
+  }
+  map[i] = '\0';
 }
