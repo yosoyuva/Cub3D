@@ -57,4 +57,26 @@ void ft_error(t_get *get, char *str)
   // get->error == 10 ==> sprite
   // get->error == 101 ==> sprite plus d'une fois
   // get->error == 2 ==>
+  int i;
+
+  i = 0;
+  write(1, "Error\n", 6);
+	write(1, str, ft_strlen(str));
+  if (get->no)
+		free(get->no);
+	if (get->so)
+		free(get->so);
+	if (get->we)
+		free(get->we);
+	if (get->ea)
+		free(get->ea);
+	if (get->s)
+		free(get->s);
+	if (get->map)
+	{
+		while (++i < get->nblines)
+			free(get->map[i]);
+	}
+  if (get->map)
+		free(get->map);
 }

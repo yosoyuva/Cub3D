@@ -17,15 +17,9 @@ typedef struct  s_data {
     int         endian;
     int         area;
     int         i;
-    void *ptr;
-    void *win;
+    void        *ptr;
+    void        *win;
 }               t_data;
-
-typedef struct s_mlx_id
-{
-  void *mlx_ptr;
-  void *mlx_win;
-}               t_mlx_id;
 
 typedef struct  s_mystruct
 {
@@ -53,6 +47,8 @@ typedef struct  s_get
     int nblines;
     int linesize;
     char **map;
+    int screen_rx;
+    int screen_ry;
 }               t_get;
 
 /* get_next_line struct */
