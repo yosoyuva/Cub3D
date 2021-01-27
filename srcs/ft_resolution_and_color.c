@@ -1,5 +1,16 @@
 #include "../include/cub3d.h"
 
+int ft_rest_is_wspace(char *str, int *i)
+{
+  int j;
+
+  j = *i;
+  ft_iswhite_space(&j, str);
+  if (str[j] != '\n' && str[j] != '\0')
+    return (0);
+  return (1);
+}
+
 /* recuperer la resolution depuis read (ligne du .cup renvoyer par get_next_line) */
 void ft_resolution(t_get *get, char *read, int *i)
 {
@@ -18,7 +29,7 @@ void ft_resolution(t_get *get, char *read, int *i)
     get->error = 71;
 }
 
-int		create_rgb(int r, int g, int b)
+int		ft_create_rgb(int r, int g, int b)
 {
 	return(r << 24 | g << 16 | b << 8);
 }

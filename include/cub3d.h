@@ -8,6 +8,8 @@
 # include <sys/types.h>
 # include <sys/stat.h>
 # include <fcntl.h>
+# define INT_MAX 2147483647
+# define BUFFER_SIZE	4096
 
 typedef struct  s_data {
     void        *img;
@@ -61,11 +63,11 @@ struct	s_variables
 
 int ft_parsing(char *file, t_get *get);
 void ft_error(t_get *get, char *str);
-int cub3d(char *str, t_get *get);
+int ft_cub3d(char *str, t_get *get);
 void ft_init(t_get *get);
 int ft_parsing_check_errors(char *file, t_get *get);
 /* get_next_line functions */
-int		get_next_line(int fd, char **line);
+int		get_next_line(const int fd, char **line, t_get *get);
 char	*ft_strsub(char const *s, unsigned int start, size_t len);
 char	*ft_strjoin(char const *s1, char const *s2);
 char	*ft_strnew(int size, int a);
@@ -87,5 +89,12 @@ void ft_color_floor(t_get *get, char *read, int *i);
 void ft_color_ceiling(t_get *get, char *read, int *i);
 int		ft_iswhite_space(int *i, const char *str);
 int		ft_atoi_cub(const char *str, int *i);
-
+int ft_map(t_get *get, char *str, int *i);
+int ft_is_map(char *str);
+void ft_copy_map_aux(char *str, char *map);
+void ft_verify(t_get *get);
+void ft_mlx_win_img(t_get *get, t_data *mlx);
+int		ft_create_rgb(int r, int g, int b);
+int ft_strlen2(char *str);
+char *ft_get_path(char *str, int *i, t_get *get);
 #endif

@@ -10,7 +10,7 @@ void            my_mlx_pixel_put(t_data *data, int x, int y, int color)
     // Je pense que ca a voir avec le fait qu'on donne "l'adresse" de l'image maisd'un autre cote on lui ajoute un valeur
 }
 
-void           print_square(t_data *data, int x, int y, int color, int area)
+/*void           print_square(t_data *data, int x, int y, int color, int area)
 {
   int i;
   int j;
@@ -70,7 +70,7 @@ int render_next_frame(t_data *img)
   }
   return (0);
 }
-
+*/
 /*int main(void)
 {
   t_mlx_id mlx_id;
@@ -123,7 +123,7 @@ int ft_parsing_check_errors(char *file, t_get *get)
 			 6)- La description de la map n'est pas forcement carree tant qu'elle est ferme par des murs ca passe
 			 7)- Pour chaque élement, le premier caractère est l’identifiant (un ou deux carac-tères : R, NO, SO, WE, EA, S, F, C), suivi de toutes les informations spécifiques à l’élément dans l'ordre (avec un ou plusieurs espaces entre eux)
 		*/
-		ft_get_cub_info(file, get, &read);
+		ft_get_cub_info(get, &read);
 		free(read);
 		if (get->error > 0)
 			ft_error(get, "error in getting map info");
@@ -136,7 +136,7 @@ int ft_parsing_check_errors(char *file, t_get *get)
 	//ft_parsing(file, get);
 }
 
-int cub3d(char *str, t_get *get)
+int ft_cub3d(char *str, t_get *get)
 {
 	int			i;
 
@@ -162,7 +162,21 @@ int cub3d(char *str, t_get *get)
 void ft_init(t_get *get)
 {
 	/* on initialise les variables*/
-	get->save == 0;
+	get->save = 0;
+  get->error = 0;
+  get->rx = 0;
+  get->ry = 0;
+  get->no = NULL;
+  get->so = NULL;
+  get->we = NULL;
+  get->ea = NULL;
+  get->s = NULL;
+  get->f = 0;
+  get->c = 0;
+  get->nblines = 0;
+  get->linesize = 0;
+  get->screen_rx = 0;
+  get->screen_ry = 0;
 }
 
 int main(int ac, char** av)

@@ -8,7 +8,7 @@ int ft_mlx(t_get *get)
 
   mlx.i = 1;
   if (!(mlx.ptr = mlx_init()))// Connecting to the minilibx and save the ID connection to mlx_ptr
-    ft_error(recup, "Mlx initialization failed\n");
+    ft_error(get, "Mlx initialization failed\n");
   ft_mlx_win_img(get, &mlx);
 /*  mlx_put_image_to_window(mlx.ptr, mlx.win, mlx.img, 0, 0);
   //mlx_key_hook(mlx_id.mlx_win, esc_hook, &mlx_id);
@@ -18,9 +18,10 @@ int ft_mlx(t_get *get)
   mlx.win = mlx.win;
   mlx_loop_hook(mlx.ptr, render_next_frame, &mlx);*/
   mlx_loop(mlx.ptr);// A loop to keep the connection up
+  return (1);
 }
 
-int ft_mlx_win_img(t_get *get, t_data *mlx)
+void ft_mlx_win_img(t_get *get, t_data *mlx)
 {
   mlx_get_screen_size(mlx->ptr, &get->screen_rx, &get->screen_ry);// recupere la resolution de l'ecran
   get->rx = (get->rx > get->screen_rx) ? get->screen_rx : get->rx;

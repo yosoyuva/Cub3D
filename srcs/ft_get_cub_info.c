@@ -8,7 +8,7 @@ int ft_rest_is_wspace(char *str, int *i)
   return (1);
 }
 
-void ft_get_cub_info(char *file, t_get *get, char *read)
+void ft_get_cub_info(t_get *get, char *read)
 {
   int i;
 
@@ -30,7 +30,7 @@ void ft_get_cub_info(char *file, t_get *get, char *read)
       ft_texture_we(get, read, &i);
     if (read[i] == 'E' && read[i + 1] == 'A')
       ft_texture_ea(get, read, &i);
-    if (read[i] == 'S' && read[i + 1] =! 'O')
+    if (read[i] == 'S' && read[i + 1] != 'O')
       ft_texture_sprite(get, read, &i);
     if (read[i] == 'F')
       ft_color_floor(get, read, &i);
@@ -66,14 +66,14 @@ int ft_map(t_get *get, char *str, int *i)
   }
   while (ft_is_char_map(str, i))
   {
-    if (str[*i] = ' ')
+    if (str[*i] == ' ')
     {
       if (str[*i - 1] != '1')
         get->error = 2;
       while (str[*i] == ' ')
         (*i)++;
       if (str[*i] != '1' && str[*i] != '\n' && str[*i] != '\0')
-        get->erro = 2;
+        get->error = 2;
     }
     (*i)++;
   }
@@ -82,7 +82,7 @@ int ft_map(t_get *get, char *str, int *i)
    get->error = 2;
     return (0);
   }
-  if (ft_strlen(str) > get->linesize)
+  if ((int)ft_strlen(str) > get->linesize)
     get->linesize = ft_strlen(str);
   get->nblines = get->nblines + 1;
   return (1);
@@ -108,15 +108,16 @@ int ft_copy_map(char *file, char *read, t_get *get)
   i = 0;
   while (ret != 0)
 	{
-		ret = get_next_line(fd, read, get);
+		ret = get_next_line(fd, &read, get);
     if (ft_is_map(read)/*condition : c'est une ligne de map */)
     {
-      ft_copy_map_aux(read, &(get->map[i]);
+      ft_copy_map_aux(read, get->map[i]);
       i++;
     }
 	}
 	close(fd);
   ft_verify(get);
+  return (1);
 }
 
 void ft_copy_map_aux(char *str, char *map)
@@ -126,11 +127,22 @@ void ft_copy_map_aux(char *str, char *map)
   i = 0;
   while (str[i])
   {
-    if (str[i] = ' ')
+    if (str[i] == ' ')
       map[i] = '1';
     else
       map[i] = str[i];
     i++;
   }
   map[i] = '\0';
+}
+
+int ft_is_map(char *str)
+{
+  int i;
+
+  i = 0;
+  ft_iswhite_space(&i, str);
+  if (str[i] == '1')
+    return (1);
+  return (0);
 }

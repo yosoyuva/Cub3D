@@ -7,7 +7,7 @@ void ft_texture_no(t_get *get, char *read, int *i)
   if (get->no == NULL)
   {
     (*i)++;
-    get->no = ft_get_path(read, i);
+    get->no = ft_get_path(read, i, get);
     if (get->no == NULL)
       get->error = 6;
   }
@@ -21,8 +21,8 @@ void ft_texture_so(t_get *get, char *read, int *i)
       get->error = 6;*/
   if (get->so == NULL)
   {
-    (*i)+2;
-    get->so = ft_get_path(read, i);
+    *i = *i +2;
+    get->so = ft_get_path(read, i, get);
     if (get->so == NULL)
       get->error = 5;
   }
@@ -36,8 +36,8 @@ void ft_texture_we(t_get *get, char *read, int *i)
       get->error = 6;*/
   if (get->we == NULL)
   {
-    (*i)+2;
-    get->we = ft_get_path(read, i);
+    *i = *i +2;
+    get->we = ft_get_path(read, i, get);
     if (get->we == NULL)
       get->error = 4;
   }
@@ -51,8 +51,8 @@ void ft_texture_ea(t_get *get, char *read, int *i)
       get->error = 6;*/
   if (get->ea == NULL)
   {
-    (*i)+2;
-    get->ea = ft_get_path(read, i);
+    *i = *i +2;
+    get->ea = ft_get_path(read, i, get);
     if (get->ea == NULL)
       get->error = 3;
   }
@@ -67,7 +67,7 @@ void ft_texture_sprite(t_get *get, char *read, int *i)
   if (get->s == NULL)
   {
     (*i)++;
-    get->s = ft_get_path(read, i);
+    get->s = ft_get_path(read, i, get);
     if (get->s == NULL)
       get->error = 10;
   }
@@ -75,7 +75,7 @@ void ft_texture_sprite(t_get *get, char *read, int *i)
     get->error = 101;
 }
 
-char *ft_get_path(char *str, int *i)
+char *ft_get_path(char *str, int *i, t_get *get)
 {
   char *path;
   int j;
@@ -86,7 +86,7 @@ char *ft_get_path(char *str, int *i)
   {
     if (!(path = malloc(sizeof(char) * (ft_strlen2(str) + 1))))
 		{
-      recup->erreur = 2;
+      get->error = 2;
       return (NULL);
     }
     while (str[*i] != '\0')
