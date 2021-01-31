@@ -1,46 +1,52 @@
 #include "../include/cub3d.h"
 
-int ft_rest_is_wspace(char *str, int *i)
+/*int ft_rest_is_wspace(char *str, int *i)
 {
   ft_iswhite_space(i, str);
   if (str[*i])
     return (0);
   return (1);
-}
+}*/
 
 void ft_get_cub_info(t_get *get, char *read)
 {
   int i;
 
   i = 0;
-  while (read[i])
+  if (read[i])
   {
-    if (read[i] == '\n')
-     break ;
+    printf("***4***\n");
+  //  if (read[i] == '\n')
+  //   break ;
+    printf("***5***\n");
     ft_iswhite_space(&i, read);
+    printf("***6***\n");
     //while (read[i] == ' ')
     //  i++;
     if (read[i] == 'R')
       ft_resolution(get, read, &i);
-    if (read[i] == 'N' && read[i + 1] == 'O')
+    else if (read[i] == 'N' && read[i + 1] == 'O')
       ft_texture_no(get, read, &i);
-    if (read[i] == 'S' && read[i + 1] == 'O')
+    else if (read[i] == 'S' && read[i + 1] == 'O')
       ft_texture_so(get, read, &i);
-    if (read[i] == 'W' && read[i + 1] == 'E')
+    else if (read[i] == 'W' && read[i + 1] == 'E')
       ft_texture_we(get, read, &i);
-    if (read[i] == 'E' && read[i + 1] == 'A')
+    else if (read[i] == 'E' && read[i + 1] == 'A')
       ft_texture_ea(get, read, &i);
-    if (read[i] == 'S' && read[i + 1] != 'O')
+    else if (read[i] == 'S' && read[i + 1] != 'O')
       ft_texture_sprite(get, read, &i);
-    if (read[i] == 'F')
+    else if (read[i] == 'F')
       ft_color_floor(get, read, &i);
-    if (read[i] == 'C')
+    else if (read[i] == 'C')
       ft_color_ceiling(get, read, &i);
     /* recuperer les info de la map creer un tableau de tableau que je remplirai ligne par ligne en fonction de ce qui est lu par get_next_line */
-    if (read[i] == '1')
+    else if (read[i] == '1')
       ft_map(get, read, &i);
-    if (read[i] == '\n' && (get->linesize > 0 || get->nblines > 0))
+    else if (read[i] == '\n' && (get->linesize > 0 || get->nblines > 0))
       ft_error(get, "line feed on map desciption");
+    else
+      ft_error(get, "false map");
+    printf("***7***\n");
   }
 }
 

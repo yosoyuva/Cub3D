@@ -6,7 +6,7 @@
 /*   By: ymehdi <ymehdi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/10 21:46:23 by ymehdi            #+#    #+#             */
-/*   Updated: 2020/01/24 16:18:01 by ymehdi           ###   ########.fr       */
+/*   Updated: 2021/01/31 13:44:57 by ymehdi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,11 +98,11 @@ int		get_next_line(const int fd, char **line, t_get *get)
 	struct s_variables	var;
 
 	/* Le cas ou il y a eu une erruer lors du traitement de la map et que le programme s'apprette a renvoyer "error while parsing" free red[1024]*/
-	/*if (get->error)
+	if (get->error)
 	{
 			free(red[fd]);
 			return 0;
-	}*/
+	}
 	if (fd < 0 || line == NULL || !(var.buf = ft_strnew(BUFFER_SIZE, 7)))
 		return (-1);
 	while ((var.ret = read(fd, var.buf, BUFFER_SIZE)) > 0)

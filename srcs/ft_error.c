@@ -36,6 +36,12 @@ void ft_verify(t_get *get)
     ft_error(get, "more or less than one player");
 }
 
+void ft_initprintf(t_get *get)
+{
+	/* on initialise les variables*/
+	printf("get->error = %d, get->rx = %d get->ry = %d, get->no = %s, get->so = %s, get->we = %s,get->ea = %s;  get->s = %s;get->f = %d;get->c = %d;get->nblines = %d, get->linesize = %d; get->screen_rx = %d; get->screen_ry = %d\n", get->error, get->rx, get->ry, get->no, get->so, get->we, get->ea, get->s, get->f, get->c, get->nblines, get->linesize, get->screen_rx, get->screen_ry);
+}
+
 void ft_error(t_get *get, char *str)
 {
 	/* fonction qui renvoi un message d'erreur et free ce qui a ete allouer par ft_init */
@@ -62,6 +68,7 @@ void ft_error(t_get *get, char *str)
   i = 0;
   write(1, "Error\n", 6);
 	write(1, str, ft_strlen(str));
+  ft_initprintf(get);
   if (get->no)
 		free(get->no);
 	if (get->so)
@@ -79,4 +86,5 @@ void ft_error(t_get *get, char *str)
 	}
   if (get->map)
 		free(get->map);
+  exit(0);
 }

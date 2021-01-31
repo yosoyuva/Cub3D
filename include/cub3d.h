@@ -40,6 +40,7 @@ typedef struct  s_get
     char *s;// chemin vers le sprite
     int f;// couleur du resolution
     int c;// couleur du plafond
+    int comma;
     /* error = 0 ==> pas d'erreur
        error = 7 ==> erreur au niveau de la resolution
        error = 71 ==> resolution apparu plus d'une fois sur le fichier description .cub
@@ -65,7 +66,7 @@ int ft_parsing(char *file, t_get *get);
 void ft_error(t_get *get, char *str);
 int ft_cub3d(char *str, t_get *get);
 void ft_init(t_get *get);
-int ft_parsing_check_errors(char *file, t_get *get);
+void ft_parsing_check_errors(char *file, t_get *get);
 /* get_next_line functions */
 int		get_next_line(const int fd, char **line, t_get *get);
 char	*ft_strsub(char const *s, unsigned int start, size_t len);
@@ -94,7 +95,10 @@ int ft_is_map(char *str);
 void ft_copy_map_aux(char *str, char *map);
 void ft_verify(t_get *get);
 void ft_mlx_win_img(t_get *get, t_data *mlx);
-int		ft_create_rgb(int r, int g, int b);
+int		ft_create_rgb(int a, int r, int g, int b);
 int ft_strlen2(char *str);
 char *ft_get_path(char *str, int *i, t_get *get);
+void ft_get_cub_info(t_get *get, char *read);
+int ft_copy_map(char *file, char *read, t_get *get);
+int ft_rest_is_wspace(char *str, int *i);
 #endif

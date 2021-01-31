@@ -28,7 +28,11 @@ SRCS_DIR = srcs/
 
 INC_DIR = include/
 
-OBJS = $(addprefix $(OBJS_DIR),$(SRCS:.c=.o))
+OBJS_IN_DIR = $(addprefix $(OBJS_DIR),$(SRCS:.c=.o))
+
+SRCS_IN_DIR = $(addprefix $(SRCS_DIR),$(SRCS))
+
+OBJS = $(SRCS:.c=.o)
 
 all: $(NAME) $(OBJS)
 
@@ -37,12 +41,14 @@ $(NAME): $(OBJS)
 		@make -C $(LIB_DIR)
 		@echo Copying $(LIBFT_A) to root.
 		@cp $(LIB_DIR)$(LIBFT_A) .
-		${CC} $(CFLAGS) -o $(NAME) $(OBJS) -L $(MLX_DIR) -lmlx -lm -lbsd -lX11 -lXext -lft
+		${CC} $(CFLAGS) -o $(NAME) $(OBJS_IN_DIR) -L. -lft -L $(MLX_DIR) -lmlx -lm -lbsd -lX11 -lXext
 		@echo $(NAME) : Created !
 
 $(OBJS):
+		@rm -rf $(OBJS_DIR)
 		@mkdir $(OBJS_DIR)
-		${CC} $(CFLAGS) -I $(INC_DIR) -I $(MLX_DIR) -c $(SRCS_DIR)*.c
+		${CC} $(CFLAGS) -I $(INC_DIR) -I $(MLX_DIR) -c $(SRCS_IN_DIR)
+		@mv $(OBJS) $(OBJS_DIR)
 
 clean:
 		@rm -rf $(OBJS_DIR)
