@@ -105,17 +105,18 @@ int ft_copy_map(char *file, char *read, t_get *get)
   printf("***1***\n");
   fd = open(file, O_RDONLY);
   printf("***2***\n");
-  if (!(get->map = malloc(sizeof(char*) * get->nblines)))
+  if (!(get->map = malloc(sizeof(char *) * (get->nblines + 1))))
 		return (0);
   printf("***3***\n");
   while (i <= get->nblines)
   {
-    if (!(get->map[i] = malloc(sizeof(char*) * get->linesize)))
+    if (!(get->map[i] = malloc(sizeof(char) * (get->linesize + 1))))
   		return (0);
     printf("***31***\n");
+    i++;
   }
   printf("***4***\n");
-  get->map[i][0] = '\0';
+  get->map[i - 1][0] = '\0';
   printf("***5***\n");
   i = 0;
   while (ret != 0)
@@ -134,7 +135,7 @@ int ft_copy_map(char *file, char *read, t_get *get)
 	close(fd);
   printf("***7***\n");
   ft_verify(get);
-  printf("***8***\n");
+  printf("***Fin de copy map***\n");
   return (1);
 }
 

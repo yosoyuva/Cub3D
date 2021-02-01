@@ -94,6 +94,30 @@ int render_next_frame(t_data *img)
   mlx_loop(mlx_id.mlx_ptr);// A loop to keep the connection up
 }*/
 
+void ft_printf_map(t_get *get)
+{
+  int i;
+//  int j;
+
+  i = 0;
+  //j = 0;
+  /*while (get->map[i])
+  {
+    j = 0;
+    while (get->map[i][j])
+    {
+      printf("");
+      j++;
+    }
+    i++;
+  }*/
+  while (get->map[i])
+  {
+    printf("%s\n", get->map[i]);
+    i++;
+  }
+}
+
 void ft_parsing_check_errors(char *file, t_get *get)
 {
 	int fd;
@@ -164,6 +188,7 @@ int ft_cub3d(char *str, t_get *get)
 	else
 		ft_error(get, "Map's name invalid\n"); // fonction qui renvoi un message d'erreur et free ce qui a ete allouer par ft_init
 	printf("NO = %s, SO = %s, EA = %s, WE = %s, S = %s, rx = %d, ry = %d, F = %d, C = %d\n", get->no, get->so, get->ea, get->we, get->s, get->rx, get->ry, get->f, get->c);
+  ft_printf_map(get);
   return (1);
 }
 

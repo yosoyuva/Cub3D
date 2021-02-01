@@ -23,6 +23,7 @@ int ft_n_player(t_get *get)
         pos++;
       j++;
     }
+    i++;
   }
   return (pos);
 }
@@ -32,6 +33,7 @@ void ft_verify(t_get *get)
 /* deja fait lors du parsing*/
   //if (ft_walls(get))
   //  ft_error(get, "map is not close");
+  printf("***8***\n");
   if (ft_n_player(get) != 1)
     ft_error(get, "more or less than one player");
 }
