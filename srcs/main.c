@@ -127,7 +127,7 @@ void ft_parsing_check_errors(char *file, t_get *get)
 			 7)- Pour chaque élement, le premier caractère est l’identifiant (un ou deux carac-tères : R, NO, SO, WE, EA, S, F, C), suivi de toutes les informations spécifiques à l’élément dans l'ordre (avec un ou plusieurs espaces entre eux)
 		*/
 		ft_get_cub_info(get, read);
-    printf("***8***\n");
+  //  printf("***8***\n");
 		free(read);
 		if (get->error > 0)
 			ft_error(get, "error in getting map info");
@@ -163,8 +163,8 @@ int ft_cub3d(char *str, t_get *get)
 		ft_parsing_check_errors(str, get);
 	else
 		ft_error(get, "Map's name invalid\n"); // fonction qui renvoi un message d'erreur et free ce qui a ete allouer par ft_init
-	return (0);
-  printf("%s", get->map[0]);
+	printf("NO = %s, SO = %s, EA = %s, WE = %s, S = %s, rx = %d, ry = %d, F = %d, C = %d\n", get->no, get->so, get->ea, get->we, get->s, get->rx, get->ry, get->f, get->c);
+  return (1);
 }
 
 void ft_init(t_get *get)

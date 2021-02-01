@@ -34,15 +34,11 @@ int		ft_atoi_cub(const char *str, int *i)
 	res = 0;
 	if (!str)
     return (-1);
-	printf("***10***\n");
 	*i = ft_iswhite_space_n_out(i, str);
-	printf("***110***\n");
 //	if (ft_issign(i, str))
 //		return (-1);
-	printf("***11***\n");
 	if (str[*i] < '0' || str[*i] > '9')
 		return (-1);
-	printf("***12***\n");
 	while (str[*i] >= '0' && str[*i] <= '9')
 	{
 		if ((res > INT_MAX / 10) || (res == INT_MAX / 10 && str[*i] - 48 > 7))
@@ -53,6 +49,5 @@ int		ft_atoi_cub(const char *str, int *i)
 		(*i)++;
 	}
 	*i = ft_iswhite_space_n_out(i, str);
-	printf("***13***\n");
 	return (res);
 }

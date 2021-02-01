@@ -46,7 +46,7 @@ void ft_get_cub_info(t_get *get, char *read)
       ft_error(get, "line feed on map desciption");
     else
       ft_error(get, "false map");
-    printf("***7***\n");
+  //  printf("***7***\n");
   }
 }
 
@@ -102,27 +102,39 @@ int ft_copy_map(char *file, char *read, t_get *get)
 
   ret = 1;
   i = 0;
+  printf("***1***\n");
   fd = open(file, O_RDONLY);
+  printf("***2***\n");
   if (!(get->map = malloc(sizeof(char*) * get->nblines)))
 		return (0);
+  printf("***3***\n");
   while (i <= get->nblines)
   {
     if (!(get->map[i] = malloc(sizeof(char*) * get->linesize)))
   		return (0);
+    printf("***31***\n");
   }
+  printf("***4***\n");
   get->map[i][0] = '\0';
+  printf("***5***\n");
   i = 0;
   while (ret != 0)
 	{
 		ret = get_next_line(fd, &read, get);
+    printf("***51***\n");
     if (ft_is_map(read)/*condition : c'est une ligne de map */)
     {
       ft_copy_map_aux(read, get->map[i]);
+      printf("***511***\n");
       i++;
     }
+    printf("***52***\n");
 	}
+  printf("***6***\n");
 	close(fd);
+  printf("***7***\n");
   ft_verify(get);
+  printf("***8***\n");
   return (1);
 }
 

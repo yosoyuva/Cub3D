@@ -84,11 +84,9 @@ int ft_atoi_cub_color(t_get *get, char *str, int *i)
   if (!str)
     return (-1);
   *i = ft_iswhite_space(i, str);
-  printf("***8***\n");
   if (ft_check_comma(str, i)/* && ft_check_color_range(str, i)*/)
     return (-1);
-  printf("str[i] = %c, str = %s, i = %d", str[*i], str, *i);
-  printf("***9***\n");
+  //printf("str[i] = %c, str = %s, i = %d", str[*i], str, *i);
   r1 = ft_atoi_cub(str, i);
   if (str[*i] == ',')
     *i = *i + 1;
@@ -102,10 +100,9 @@ int ft_atoi_cub_color(t_get *get, char *str, int *i)
   r3 = ft_atoi_cub(str, i);
   if ((r1 > 255 || r1 < 0 || r2 > 255 || r2 < 0 || r3 > 255 || r3 < 0) && (str[*i] == '\0' || str[*i] == '\n'))
     ft_error(get, "invalide color");
-  printf("r1 = %d, r2 = %d, r3 = %d\n", r1, r2, r3);
+//  printf("r1 = %d, r2 = %d, r3 = %d\n", r1, r2, r3);
   res = ft_create_rgb(0, r1, r2, r3);
-  printf("res = %d\n", res);
-  printf("***10***\n");
+//  printf("res = %d\n", res);
   return (res);
 }
 
@@ -131,12 +128,9 @@ void ft_color_ceiling(t_get *get, char *read, int *i)
   if (get->c == -1)
   {
     (*i)++;
-    printf("***7***\n");
     get->c = ft_atoi_cub_color(get, read, i);
-    printf("***11***\n");
     if (get->c == -1 || !ft_rest_is_wspace(read, i))
       get->error = 9;
-    printf("***12***\n");
   }
   else
     get->error = 91;

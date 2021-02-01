@@ -39,7 +39,7 @@ void ft_verify(t_get *get)
 void ft_initprintf(t_get *get)
 {
 	/* on initialise les variables*/
-	printf("get->error = %d, get->rx = %d get->ry = %d, get->no = %s, get->so = %s, get->we = %s,get->ea = %s;  get->s = %s;get->f = %d;get->c = %d;get->nblines = %d, get->linesize = %d; get->screen_rx = %d; get->screen_ry = %d\n", get->error, get->rx, get->ry, get->no, get->so, get->we, get->ea, get->s, get->f, get->c, get->nblines, get->linesize, get->screen_rx, get->screen_ry);
+	printf("\nget->error = %d, get->rx = %d get->ry = %d, get->no = %s, get->so = %s, get->we = %s,get->ea = %s;  get->s = %s;get->f = %d;get->c = %d;get->nblines = %d, get->linesize = %d; get->screen_rx = %d; get->screen_ry = %d\n", get->error, get->rx, get->ry, get->no, get->so, get->we, get->ea, get->s, get->f, get->c, get->nblines, get->linesize, get->screen_rx, get->screen_ry);
 }
 
 void ft_error(t_get *get, char *str)

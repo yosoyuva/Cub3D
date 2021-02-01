@@ -4,10 +4,13 @@ void ft_texture_no(t_get *get, char *read, int *i)
 {
 /*if (data de map no NULL)
     get->error = 6;*/
+  *i = *i + 1;
+  printf("***7***\n");
   if (get->no == NULL)
   {
     (*i)++;
     get->no = ft_get_path(read, i, get);
+    printf("***fin get path no***\n");
     if (get->no == NULL)
       get->error = 6;
   }
@@ -19,6 +22,7 @@ void ft_texture_so(t_get *get, char *read, int *i)
 {
   /*if (data de map no NULL)
       get->error = 6;*/
+  *i = *i + 1;
   if (get->so == NULL)
   {
     *i = *i +2;
@@ -34,6 +38,7 @@ void ft_texture_we(t_get *get, char *read, int *i)
 {
   /*if (data de map no NULL)
       get->error = 6;*/
+  *i = *i + 1;
   if (get->we == NULL)
   {
     *i = *i +2;
@@ -49,6 +54,7 @@ void ft_texture_ea(t_get *get, char *read, int *i)
 {
   /*if (data de map no NULL)
       get->error = 6;*/
+  *i = *i + 1;
   if (get->ea == NULL)
   {
     *i = *i +2;
@@ -82,6 +88,8 @@ char *ft_get_path(char *str, int *i, t_get *get)
 
   j = 0;
   *i = ft_iswhite_space(i, str);
+  printf("***8***\n");
+  printf("str[*i] = %c, *i = %d\n", str[*i], *i);
   if (str[*i] == '.' && str[*i + 1] == '/')
   {
     if (!(path = malloc(sizeof(char) * (ft_strlen2(str) + 1))))
