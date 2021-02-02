@@ -101,4 +101,6 @@ char *ft_get_path(char *str, int *i, t_get *get);
 void ft_get_cub_info(t_get *get, char *read);
 int ft_copy_map(char *file, char *read, t_get *get);
 int ft_rest_is_wspace(char *str, int *i);
+int ft_check_fencing(t_get *get);
+int ft_check_line_fencing(char *str);
 #endif

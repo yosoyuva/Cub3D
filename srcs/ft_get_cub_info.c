@@ -62,32 +62,29 @@ int ft_is_char_map(char *str, int *i)
   return (1);
 }
 
-/* check si de dexiption de map est conforme (sinon get-error = 2) et recupere le nombre de ligne et la taille de la plus grande*/
+/* check si de description de map est conforme (sinon get-error = 2) et recupere le nombre de ligne et la taille de la plus grande*/
 int ft_map(t_get *get, char *str, int *i)
 {
+  //int j;
+
+  //j = 0;
   if (str[*i] != '1')
   {
     get->error = 2;
     return (0);
   }
-  while (ft_is_char_map(str, i))
+  if (ft_is_char_map(str, i))
   {
-    if (str[*i] == ' ')
-    {
-      if (str[*i - 1] != '1')
-        get->error = 2;
-      while (str[*i] == ' ')
-        (*i)++;
-      if (str[*i] != '1' && str[*i] != '\n' && str[*i] != '\0')
-        get->error = 2;
-    }
-    (*i)++;
+    if (ft_check_line_fencing(str) == 0)
+      ft_error(get, "non closed line in map");
   }
-  if (str[*i] != '\0')
+  else
+    ft_error(get, "non valid char inside line in map");
+  /*if (str[*i] != '\0')
   {
    get->error = 2;
     return (0);
-  }
+  }*/
   if ((int)ft_strlen(str) > get->linesize)
     get->linesize = ft_strlen(str);
   get->nblines = get->nblines + 1;

@@ -36,7 +36,79 @@ void ft_verify(t_get *get)
   printf("***8***\n");
   if (ft_n_player(get) != 1)
     ft_error(get, "more or less than one player");
+  if (ft_check_fencing(get) == 0)
+    ft_error(get, "map not closed");
 }
+
+int ft_check_fencing(t_get *get)
+{
+  int i;
+  int j;
+
+  i = 0;
+  j = 0;
+  // Premier char non espace dans chaque ligne est '1'
+  while (get->map[i])
+  {
+    j = 0;
+    while (get->map[i][j])
+    {
+      while (get->map[i][j] == ' ')
+        j++;
+      if (get->map[i][j] != '1')
+        return (0);
+      break ;
+    }
+    i++;
+  }
+  i = 0;
+  // Dernier char non espace dans chaque ligne est '1'
+  while (get->map[i])
+  {
+    j = get->linesize;
+    while (get->map[i][j])
+    {
+      while (get->map[i][j] == ' ')
+        j--;
+      if (get->map[i][j] != '1')
+        return (0);
+      break ;
+    }
+    i++;
+  }
+  return (1);
+}
+
+int ft_check_line_fencing(char *str)
+{
+  int i;
+  int size;
+
+  i = 0;
+  size = ft_strlen(str);
+  // Premier char non espace dans la ligne est '1'
+  while (str[i])
+  {
+    while (str[i] == ' ')
+      i++;
+    if (str[i] != '1')
+      return (0);
+    break ;
+  }
+  i = size;
+  // Dernier char non espace dans la ligne est '1'
+  while (i >= 0)
+  {
+    while (str[i] == ' ' || str[i] == '\n')
+      i--;
+    if (str[i] != '1')
+      return (0);
+    break ;
+  }
+  printf("line = %s, str[i] = %c, i = %d\n", str, str[i], i);
+  return (1);
+}
+
 
 void ft_initprintf(t_get *get)
 {
