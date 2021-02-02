@@ -75,7 +75,7 @@ int ft_map(t_get *get, char *str, int *i)
   }
   if (ft_is_char_map(str, i))
   {
-    if (ft_check_line_fencing(str) == 0)
+    if (ft_check_line_fencing(&str[*i]) == 0)
       ft_error(get, "non closed line in map");
   }
   else
@@ -104,11 +104,13 @@ int ft_copy_map(char *file, char *read, t_get *get)
   printf("***2***\n");
   if (!(get->map = malloc(sizeof(char *) * (get->nblines + 1))))
 		return (0);
+  ft_bzero(get->map, sizeof(char *) * (get->nblines + 1));
   printf("***3***\n");
   while (i <= get->nblines)
   {
     if (!(get->map[i] = malloc(sizeof(char) * (get->linesize + 1))))
   		return (0);
+    ft_bzero(get->map[i], sizeof(char) * (get->linesize + 1));
     printf("***31***\n");
     i++;
   }

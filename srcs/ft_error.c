@@ -14,17 +14,22 @@ int ft_n_player(t_get *get)
   i = 0;
   j = 0;
   pos = 0;
+  printf("***9***\n");
   while (get->map[i])
   {
     j = 0;
+    printf("***91***\n");
     while (get->map[i][j])
     {
+      printf("***92***\n");
       if ((get->map[i][j] == 'N')  || (get->map[i][j] == 'S') || (get->map[i][j] == 'W') || (get->map[i][j] == 'E'))
         pos++;
+      printf("***93***\n");
       j++;
     }
     i++;
   }
+  printf("***10***\n");
   return (pos);
 }
 
@@ -36,6 +41,7 @@ void ft_verify(t_get *get)
   printf("***8***\n");
   if (ft_n_player(get) != 1)
     ft_error(get, "more or less than one player");
+  printf("***11***\n");
   if (ft_check_fencing(get) == 0)
     ft_error(get, "map not closed");
 }
@@ -43,12 +49,11 @@ void ft_verify(t_get *get)
 int ft_check_fencing(t_get *get)
 {
   int i;
-  int j;
 
   i = 0;
-  j = 0;
   // Premier char non espace dans chaque ligne est '1'
-  while (get->map[i])
+  // Deja fait lors de la map_copy
+  /*while (get->map[i])
   {
     j = 0;
     while (get->map[i][j])
@@ -61,9 +66,10 @@ int ft_check_fencing(t_get *get)
     }
     i++;
   }
-  i = 0;
+  i = 0;*/
   // Dernier char non espace dans chaque ligne est '1'
-  while (get->map[i])
+  // Deja fait lors de la map_copy
+  /*while (get->map[i])
   {
     j = get->linesize;
     while (get->map[i][j])
@@ -75,6 +81,30 @@ int ft_check_fencing(t_get *get)
       break ;
     }
     i++;
+  }*/
+  while (get->map[i])
+    i++;
+  if (i < 2)
+    return (0);
+  else if (i == 2)
+  {
+      if (!ft_check_fencing_case1(get))
+        return (0);
+  }
+  else if (i == 3)
+  {
+      if (!ft_check_fencing_case2(get))
+        return (0);
+  }
+  else if (i == 4)
+  {
+      if (!ft_check_fencing_case3(get))
+        return (0);
+  }
+  else
+  {
+      if (!ft_check_fencing_case4(get))
+        return (0);
   }
   return (1);
 }
@@ -92,17 +122,23 @@ int ft_check_line_fencing(char *str)
     while (str[i] == ' ')
       i++;
     if (str[i] != '1')
+    {
+      printf("str = %s\n", str);
       return (0);
+    }
     break ;
   }
-  i = size;
+  i = size - 1;
   // Dernier char non espace dans la ligne est '1'
   while (i >= 0)
   {
     while (str[i] == ' ' || str[i] == '\n')
       i--;
     if (str[i] != '1')
+    {
+      printf("s = %s, str[i] = %c, i = %d, size = %d\n", str, str[i], i, size);
       return (0);
+    }
     break ;
   }
   printf("line = %s, str[i] = %c, i = %d\n", str, str[i], i);

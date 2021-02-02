@@ -8,6 +8,7 @@
 # include <sys/types.h>
 # include <sys/stat.h>
 # include <fcntl.h>
+# include "../lib/libft.h"
 # define INT_MAX 2147483647
 # define BUFFER_SIZE	4096
 
@@ -103,4 +104,10 @@ int ft_copy_map(char *file, char *read, t_get *get);
 int ft_rest_is_wspace(char *str, int *i);
 int ft_check_fencing(t_get *get);
 int ft_check_line_fencing(char *str);
+/* ft_fencing.c */
+int ft_check_fencing_case1(t_get *get);
+int ft_check_fencing_case2(t_get *get);
+int ft_check_fencing_case3(t_get *get);
+int ft_check_fencing_case4(t_get *get);
+int ft_check_high_and_low_fence(char *str1, char *str2);
 #endif

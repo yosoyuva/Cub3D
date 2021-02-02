@@ -6,7 +6,7 @@
 /*   By: ymehdi <ymehdi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/15 15:19:54 by ymehdi            #+#    #+#             */
-/*   Updated: 2020/12/14 16:42:48 by ymehdi           ###   ########.fr       */
+/*   Updated: 2021/02/02 16:47:09 by ymehdi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,7 @@ int					ft_toupper(int c);
 
 int					ft_tolower(int c);
 
-char				*ft_strnew(size_t size);
+char				*ft_strnew_lib(size_t size);
 
 char				**ft_split(const char *s, char c);
 

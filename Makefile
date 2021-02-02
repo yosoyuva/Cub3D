@@ -6,7 +6,8 @@ SRCS =	ft_atoi_cub.c \
 		ft_texture.c \
 		get_next_line_utils.c \
 		get_next_line.c \
-		main.c
+		main.c \
+		ft_fencing.c
 
 OBJS_DIR = objs/
 
