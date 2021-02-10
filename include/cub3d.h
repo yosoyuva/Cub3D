@@ -53,6 +53,7 @@ typedef struct  s_get
     char **map;
     int screen_rx;
     int screen_ry;
+    t_data textures[5]; //mettre les info relaifsaux textures
 }               t_get;
 
 /* get_next_line struct */
