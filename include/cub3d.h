@@ -35,6 +35,8 @@ typedef struct  s_ray
 	  double			raydirx;
 	  double			raydiry;
 	  double			camerax;
+    int				mapx; //
+	  int				mapy;
 }               t_ray;
 
 typedef struct  s_get
@@ -65,6 +67,7 @@ typedef struct  s_get
     int screen_ry;
     t_data textures[5]; //mettre les info relaifsaux textures
     t_ray ray;
+    t_data mlx;
 }               t_get;
 
 /* get_next_line struct */
