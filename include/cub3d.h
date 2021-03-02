@@ -24,11 +24,18 @@ typedef struct  s_data {
     void        *win;
 }               t_data;
 
-typedef struct  s_mystruct
+typedef struct  s_ray
 {
-    int         area;
-    char        qwerty;
-}               t_mystruct;
+    double         posx;
+    double         posy;
+    double			dirx;
+	  double			diry;
+	  double			planx;
+	  double			plany;
+	  double			raydirx;
+	  double			raydiry;
+	  double			camerax;
+}               t_ray;
 
 typedef struct  s_get
 {
@@ -48,12 +55,16 @@ typedef struct  s_get
      */
     int error; // initialement a 0
     int save;
+    char depart;
+    int dx; // depart
+    int dy;
     int nblines;
     int linesize;
     char **map;
     int screen_rx;
     int screen_ry;
     t_data textures[5]; //mettre les info relaifsaux textures
+    t_ray ray;
 }               t_get;
 
 /* get_next_line struct */
@@ -69,6 +80,7 @@ void ft_error(t_get *get, char *str);
 int ft_cub3d(char *str, t_get *get);
 void ft_init(t_get *get);
 void ft_parsing_check_errors(char *file, t_get *get);
+void ft_get_depart(t_get *get);
 /* get_next_line functions */
 int		get_next_line(const int fd, char **line, t_get *get);
 char	*ft_strsub(char const *s, unsigned int start, size_t len);

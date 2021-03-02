@@ -164,3 +164,27 @@ int ft_is_map(char *str)
     return (1);
   return (0);
 }
+
+void ft_get_depart(t_get *get)
+{
+  int i;
+  int j;
+
+  i = 0;
+  while (get->map[i])
+  {
+    j = 0;
+    while (get->map[i][j])
+    {
+      if (get->map[i][j] == 'N' || get->map[i][j] == 'S' \
+      || get->map[i][j] == 'E' || get->map[i][j] == 'W')
+      {
+         get->dx = i;
+         get->dy = j;
+         get->depart = get->map[i][j];
+      }
+      j++;
+    }
+    i++;
+  }
+}

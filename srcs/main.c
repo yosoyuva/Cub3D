@@ -189,28 +189,8 @@ int ft_cub3d(char *str, t_get *get)
 		ft_error(get, "Map's name invalid\n"); // fonction qui renvoi un message d'erreur et free ce qui a ete allouer par ft_init
 	printf("NO = %s, SO = %s, EA = %s, WE = %s, S = %s, rx = %d, ry = %d, F = %d, C = %d\n", get->no, get->so, get->ea, get->we, get->s, get->rx, get->ry, get->f, get->c);
   ft_printf_map(get);
+  ft_get_depart(get);
   return (1);
-}
-
-void ft_init(t_get *get)
-{
-	/* on initialise les variables*/
-	get->save = 0;
-  get->error = 0;
-  get->rx = 0;
-  get->ry = 0;
-  get->no = NULL;
-  get->so = NULL;
-  get->we = NULL;
-  get->ea = NULL;
-  get->s = NULL;
-  get->f = -1;
-  get->c = -1;
-  get->comma = 0;
-  get->nblines = 0;
-  get->linesize = 0;
-  get->screen_rx = 0;
-  get->screen_ry = 0;
 }
 
 int main(int ac, char** av)
