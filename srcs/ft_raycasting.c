@@ -19,12 +19,21 @@ int ft_mlx(t_get *get)
   mlx_loop_hook(mlx.ptr, render_next_frame, &mlx);*/
   //mlx_loop(get->mlx.ptr);// A loop to keep the connection up
 
-  //mlx_hook(get->mlx.win, 33, 1L << 17, ft_exit, get);// destroy window
+  mlx_hook(get->mlx.win, 33, 1L << 17, ft_exit, get);// destroy windowwhen clicking on the cross
 	mlx_hook(get->mlx.win, 2, 1L << 0, ft_key_press, get);
 	mlx_loop_hook(get->mlx.ptr, ft_raycasting, get);
 	mlx_hook(get->mlx.win, 3, 1L << 1, ft_key_release, get);
 	mlx_loop(get->mlx.ptr);
   return (1);
+}
+
+void ft_raycasting(t_get *get)
+{
+  get->ray.x = 0;// on initialise
+  while (get->ray.x < get->rx)
+  {
+
+  }
 }
 
 void ft_mlx_win_img(t_get *get)
@@ -38,6 +47,7 @@ void ft_mlx_win_img(t_get *get)
   get->mlx.addr = mlx_get_data_addr(get->mlx.img, &(get->mlx.bits_per_pixel), &(get->mlx.line_length),
                                 &(get->mlx.endian));
 }
+
 
 void ft_get_texture(t_get *get)
 {
@@ -81,9 +91,4 @@ void ft_get_texture_addr(t_get *get)
 	get->texture[4].addr = (int *)mlx_get_data_addr(get->texture[4].img,
 			&get->texture[4].bits_per_pixel,
 			&get->texture[4].line_length, &get->texture[4].endian);
-}
-
-void ft_raycasting()
-{
-  
 }

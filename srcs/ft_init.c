@@ -54,3 +54,10 @@ void	ft_init_dir(t_recup *get)
 	if (get->depart == 'W')
 		get->ray.planx = -0.66;
 }
+
+void ft_init_raycasting2(t_get *get)
+{
+  get->ray.camerax = 2 * (double)get->ray.x / (double)get->rx - 1;
+  get->ray.raydirx = get->ray.dirx + get->ray.planx * get->ray.camerax;
+  get->ray.raydiry = get->ray.diry + get->ray.plany * get->ray.camerax;
+}

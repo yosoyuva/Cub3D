@@ -37,6 +37,7 @@ typedef struct  s_ray
 	  double			camerax;
     int				mapx; //
 	  int				mapy;
+    int x; // l'indice de la colone a afficher sur l'ecran (ou la position du trace)
 }               t_ray;
 
 typedef struct  s_get
