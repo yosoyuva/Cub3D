@@ -7,6 +7,7 @@ int ft_mlx(t_get *get)
   //t_mystruct mystruct;
 
   get->mlx.i = 1;
+  ft_init_raycasting(get);
   if (!(get->mlx.ptr = mlx_init()))// Connecting to the minilibx and save the ID connection to mlx_ptr
     ft_error(get, "Mlx initialization failed\n");
   ft_mlx_win_img(get);
@@ -32,7 +33,8 @@ void ft_raycasting(t_get *get)
   get->ray.x = 0;// on initialise
   while (get->ray.x < get->rx)
   {
-
+    ft_init_raycasting2(get);
+    
   }
 }
 

@@ -9,6 +9,7 @@
 # include <sys/stat.h>
 # include <fcntl.h>
 # include "../lib/libft.h"
+# include <math.h>
 # define INT_MAX 2147483647
 # define BUFFER_SIZE	4096
 
@@ -35,8 +36,18 @@ typedef struct  s_ray
 	  double			raydirx;
 	  double			raydiry;
 	  double			camerax;
-    int				mapx; //
-	  int				mapy;
+    int				mapx; // position (x)
+	  int				mapy; // position (y)
+    double deltadistx; // small hypo (x)
+    double deltadisty; // small hypo (y)
+    //length of ray from current position to next x or y-side
+    double sidedistx;
+    double sidedisty;
+    //what direction to step in x or y-direction (either +1 or -1)
+    int stepX;
+    int stepY;
+    int hit; //was there a wall hit?
+    int side; //was a NS or a EW wall hit?
     int x; // l'indice de la colone a afficher sur l'ecran (ou la position du trace)
 }               t_ray;
 
@@ -85,6 +96,8 @@ int ft_cub3d(char *str, t_get *get);
 void ft_init(t_get *get);
 void ft_parsing_check_errors(char *file, t_get *get);
 void ft_get_depart(t_get *get);
+void ft_init_deltas(t_get *get);
+void ft_sidedist_step(t_get *get);
 /* get_next_line functions */
 int		get_next_line(const int fd, char **line, t_get *get);
 char	*ft_strsub(char const *s, unsigned int start, size_t len);
