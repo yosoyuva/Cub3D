@@ -98,6 +98,7 @@ void ft_parsing_check_errors(char *file, t_get *get);
 void ft_get_depart(t_get *get);
 void ft_init_deltas(t_get *get);
 void ft_sidedist_step(t_get *get);
+void ft_dda(t_get *get);
 /* get_next_line functions */
 int		get_next_line(const int fd, char **line, t_get *get);
 char	*ft_strsub(char const *s, unsigned int start, size_t len);

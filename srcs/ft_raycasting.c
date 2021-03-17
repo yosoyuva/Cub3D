@@ -34,7 +34,28 @@ void ft_raycasting(t_get *get)
   while (get->ray.x < get->rx)
   {
     ft_init_raycasting2(get);
-    
+    ft_dda(get);
+  }
+}
+
+void ft_dda(t_get *get)
+{
+  while (get->ray.hit == 0)
+  {
+    if (get->ray.sidedistx < get->ray.sidedisty)
+    {
+      get->ray.sidedistx = get->ray.sidedistx + get->ray.deltadistx;
+      get->ray.mapx = get->ray.mapx + get->ray.stepx;
+      get->ray.side = 0; // ns
+    }
+    else
+    {
+      get->ray.sidedisty = get->ray.sidedisty + get->ray.deltadisty;
+      get->ray.mapxy = get->ray.mapy + get->ray.stepy;
+      get->ray.side = 1; // ew
+    }
+    if (get->map[get->ray.mapx][get->ray.mapy] > 1)
+      hit = 1;
   }
 }
 
