@@ -56,7 +56,28 @@ void ft_dda(t_get *get)
     }
     if (get->map[get->ray.mapx][get->ray.mapy] == '1')
       hit = 1;
+    ft_dist(get);
   }
+}
+
+void ft_dist(t_get *get)
+{
+  /* preuve par thalles */
+  if (get->ray.side == 0)
+    get->ray.perpwalldist = (get->ray.mapx - get->ray.posx + \
+      (1 - get->ray.stepx) / 2) / get->ray.raydirx;
+  else
+    get->ray.perpwalldist = (get->ray.mapy - get->ray.posy + \
+      (1 - get->ray.stepy) / 2) / get->ray.raydiry;
+  /* Calculate height of line to draw on screen */
+  get->ray.lineheight = (int)(get->ry / get->ray.perpwalldist);
+  /* Calculate lowest and highest pixel to fill in current stripe */
+  get->ray.drawstart = get->ry / 2 - get->ray.lineheight / 2;
+  if (get->ray.drawstart < 0)
+    get->ray.drawstart = 0;
+  get->ray.drawend = get->ry / 2 + get->ray.lineheight / 2;
+  if (get->ray.drawend >= get->ry || get->ray.drawend < 0)
+    get->ray.drawend = get->ry - 1;
 }
 
 void ft_mlx_win_img(t_get *get)

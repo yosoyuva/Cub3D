@@ -49,6 +49,10 @@ typedef struct  s_ray
     int hit; //was there a wall hit?
     int side; //was a NS or a EW wall hit?
     int x; // l'indice de la colone a afficher sur l'ecran (ou la position du trace)
+    double perpwalldist; // the distance perpenducilar from the wall hit point to the camera plane instead of Euclidean distance to the player point, to avoid making straight walls look rounded.
+    int lineheight;
+    int drawstart;
+    int drawend;
 }               t_ray;
 
 typedef struct  s_get
