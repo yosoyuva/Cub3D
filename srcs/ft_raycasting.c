@@ -51,10 +51,10 @@ void ft_dda(t_get *get)
     else
     {
       get->ray.sidedisty = get->ray.sidedisty + get->ray.deltadisty;
-      get->ray.mapxy = get->ray.mapy + get->ray.stepy;
+      get->ray.mapy = get->ray.mapy + get->ray.stepy;
       get->ray.side = 1; // ew
     }
-    if (get->map[get->ray.mapx][get->ray.mapy] > 1)
+    if (get->map[get->ray.mapx][get->ray.mapy] == '1')
       hit = 1;
   }
 }
