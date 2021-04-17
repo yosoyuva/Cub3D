@@ -35,7 +35,33 @@ void ft_raycasting(t_get *get)
   {
     ft_init_raycasting2(get);
     ft_dda(get);
+    ft_draw_color(get);
   }
+}
+
+void ft_draw_color(t_get *get)
+{
+  int y;
+
+  y = 0;
+  while (y < get->ray.drawstart)
+  {
+    get->mlx.addr[y * get->rx + get->ray.x] = get->c;
+    y++;
+  }
+  if (y <= get->ray.drawend)
+    ft_draw(get, y);
+  y = get->ray.drawend;
+  while (y < get->ry)
+  {
+    get->mlx.addr[y * get->rx + get->ray.x] = get->f;
+    y++;
+  }
+}
+
+void ft_draw(t_get *get, int y)
+{
+  
 }
 
 void ft_dda(t_get *get)
