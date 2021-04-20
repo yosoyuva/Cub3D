@@ -12,6 +12,13 @@
 # include <math.h>
 # define INT_MAX 2147483647
 # define BUFFER_SIZE	4096
+# define ROTATE_LEFT	65361
+# define ROTATE_RIGHT	65363
+# define FORWARD_W_Z	119
+# define BACK_S_S		115
+# define RIGHT_D_D		100
+# define LEFT_A_Q		97
+# define ESC_ESC 65307
 
 typedef struct  s_data {
     void        *img;
@@ -23,6 +30,12 @@ typedef struct  s_data {
     int         i;
     void        *ptr;
     void        *win;
+    int         forward;
+    int         back;
+    int         left;
+    int         right;
+    int         rotate_right;
+    int         rotate_left;
 }               t_data;
 
 typedef struct  s_ray
@@ -53,7 +66,19 @@ typedef struct  s_ray
     int lineheight;
     int drawstart;
     int drawend;
+    double movespeed;
+    double rotspeed;
 }               t_ray;
+
+typedef struct s_text
+{
+  double wallx; // the x coordonate of where the wall was hit
+  int texface; // numero de la texture (no, so, ea, ea, s)
+  int texy;
+  int texx;
+  double step;
+  double texpos;
+}
 
 typedef struct  s_get
 {
@@ -84,6 +109,7 @@ typedef struct  s_get
     t_data textures[5]; //mettre les info relaifsaux textures
     t_ray ray;
     t_data mlx;
+    t_text text;
 }               t_get;
 
 /* get_next_line struct */
@@ -103,6 +129,9 @@ void ft_get_depart(t_get *get);
 void ft_init_deltas(t_get *get);
 void ft_sidedist_step(t_get *get);
 void ft_dda(t_get *get);
+void ft_init_texture(t_get *get);
+int ft_key_press(int keycode, t_get *get);
+int ft_key_release(int keycode, t_get *get);
 /* get_next_line functions */
 int		get_next_line(const int fd, char **line, t_get *get);
 char	*ft_strsub(char const *s, unsigned int start, size_t len);

@@ -36,7 +36,11 @@ void ft_raycasting(t_get *get)
     ft_init_raycasting2(get);
     ft_dda(get);
     ft_draw_color(get);
+    (get->ray.x)++;
   }
+  ft_forward_back(get);
+	ft_left_right(get);
+  ft_rotate_right_left(get);
 }
 
 void ft_draw_color(t_get *get)
@@ -61,7 +65,31 @@ void ft_draw_color(t_get *get)
 
 void ft_draw(t_get *get, int y)
 {
-  
+  y = get->ray.drawstart - 1;
+  ft_init_texture(get);
+  get->text.texx = (int)(get->text.wallx * (double)get->texture
+			[get->text.texface].width);
+	if (get->ray.side == 0 && get->ray.raydirx > 0)
+		get->text.texx = get->textures[get->text.texface].width -
+			get->text.texx - 1;
+	if (get->ray.side == 1 && get->ray.raydiry < 0)
+		get->text.texx = get->textures[get->text.texface].width -
+			get->text.texx - 1;
+  get->text.step = 1.0 * get->textures[0].height / get->ray.lineheight;
+  get->text.texpos = (get->ray.drawstart - get->ry / 2 + \
+    get->ray.lineheight / 2) * get->text.pos;
+  while (y <= get->ray.drawend)
+  {
+    get->text.texy = (int)get->text.texpos &
+			(get->textures[get->text.texdface].height - 1);
+		get->text.texpos += get->text.step;
+		if (y < get->ry && x < get->rx)
+			get->data.addr[y * get->data.line_length / 4 + get->ray.x] =
+				get->textures[get->text.texface].addr[get->text.texy *
+					get->textures[get->text.texface].line_length /
+					4 + get->text.texx];
+    y++;
+  }
 }
 
 void ft_dda(t_get *get)

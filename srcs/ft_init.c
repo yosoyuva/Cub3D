@@ -31,6 +31,12 @@ void ft_init_raycasting(t_get *get)
   get->ray.diry = 0;
   get->ray.planx = 0;
   get->ray.plany = 0;
+  get->data.forward = 0;
+	get->data.back = 0;
+	get->data.left = 0;
+	get->data.right = 0;
+	get->data.rotate_right = 0;
+	get->data.rotate_left = 0;
   ft_init_dir(get);
 }
 
@@ -63,6 +69,8 @@ void ft_init_raycasting2(t_get *get)
   get->ray.mapx = (int)get->ray.posx;
   get->ray.mapy = (int)get->ray.posy;
   get->ray.hit = 0;
+  get->ray.movespeed = 0.1;
+  get->ray.rotspeed = /*0.033 * 1.8*/;
   ft_init_deltas(get);
   ft_sidedist_step(get);
 }
@@ -103,4 +111,22 @@ void ft_sidedist_step(t_get *get)
     get->ray.stepy = 1;
     get->ray.sidedisty = (get->ray.mapy + 1.0 - get->ray.posy) * get->ray.deltadisty;
   }
+}
+
+void ft_init_texture(t_get *get)
+{
+  if (get->ray.side == 0 && get->ray.raydirx < 0)
+		get->text.texface = 0;
+	if (get->ray.side == 0 && get->ray.raydirx >= 0)
+		get->text.texface = 1;
+	if (get->ray.side == 1 && get->ray.raydiry < 0)
+		get->text.texface = 2;
+	if (get->ray.side == 1 && get->ray.raydiry >= 0)
+		recup->t.texdir = 3;
+  /* voir page 10/11 du rocket */
+  if (get->ray.side == 0)
+    get->text.wallx = get->ray.posy + get->ray.perpwalldist * get->ray.raydiry;
+  else
+    get->text.wallx = get->ray.posx + get->ray.perpwalldist * get->ray.raydirx;
+  get->text.wallx -= floor((get->text.wallx));
 }
