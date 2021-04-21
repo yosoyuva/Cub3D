@@ -1,6 +1,6 @@
 #include "../include/cub3d.h"
 
-void            my_mlx_pixel_put(t_data *data, int x, int y, int color)
+/*void            my_mlx_pixel_put(t_data *data, int x, int y, int color)
 {
     char    *dst;
 
@@ -8,7 +8,7 @@ void            my_mlx_pixel_put(t_data *data, int x, int y, int color)
     *(unsigned int*)dst = color;
     // QUESTION : pourquoi a marche a partir du momemnt ou on ne recupere pas dst et que la fonction renvoie un void
     // Je pense que ca a voir avec le fait qu'on donne "l'adresse" de l'image maisd'un autre cote on lui ajoute un valeur
-}
+}*/
 
 /*void           print_square(t_data *data, int x, int y, int color, int area)
 {
@@ -129,18 +129,18 @@ void ft_parsing_check_errors(char *file, t_get *get)
 		ft_error(get, "Invalid : is a directory\n");
 	if ((fd = open(file, O_RDONLY)) == -1)
 		ft_error(get, "Invalid .cub file\n");
-  printf("***1***\n");
+  //printf("***1***\n");
 	while (ret != 0)
 	{
 		/* mettre la next line de la map dans read */
 		ret = get_next_line(fd, &read, get);
-    printf("***2***\n");
+    //printf("***2***\n");
 		if (get->error > 0/*error en parsing*/)
 		{
 			free(read);
 			ft_error(get, "error while parsing");
 		}
-    printf("***3***\n");
+    //printf("***3***\n");
 		/* check les differentes information dans la map (resolution, color, texture, map ...) */
 		/* 1)- La map doit etre compose d'uniquement de : 0(espace vide), 1(murs), 2(objet) et N, S, E ou W(pour la position de depart du joueur)
 			 2)- La map doit etre ferme (entoure de 1(murs))
@@ -155,9 +155,9 @@ void ft_parsing_check_errors(char *file, t_get *get)
 		free(read);
 		if (get->error > 0)
 			ft_error(get, "error in getting map info");
-    printf("ret = %d\n", ret);
+    //printf("ret = %d\n", ret);
 	}
-  printf("******\n");
+  //printf("******\n");
 	close(fd);
 	//if(get->nblines == 0 || get->linesize == 0)
 	// ft_error(get, "no map");
@@ -182,12 +182,12 @@ int ft_cub3d(char *str, t_get *get)
 			return (0);
 		}
 	}
-  printf("i = %d, str[i] = %c\n", i, str[i]);
+  //printf("i = %d, str[i] = %c\n", i, str[i]);
 	if (str[i + 1] == 'c' && str[i + 2] == 'u' && str[i + 3] == 'b')
 		ft_parsing_check_errors(str, get);
 	else
 		ft_error(get, "Map's name invalid\n"); // fonction qui renvoi un message d'erreur et free ce qui a ete allouer par ft_init
-	printf("NO = %s, SO = %s, EA = %s, WE = %s, S = %s, rx = %d, ry = %d, F = %d, C = %d\n", get->no, get->so, get->ea, get->we, get->s, get->rx, get->ry, get->f, get->c);
+	//printf("NO = %s, SO = %s, EA = %s, WE = %s, S = %s, rx = %d, ry = %d, F = %d, C = %d\n", get->no, get->so, get->ea, get->we, get->s, get->rx, get->ry, get->f, get->c);
   ft_printf_map(get);
   ft_get_depart(get);
   return (1);
