@@ -8,7 +8,10 @@ SRCS =	ft_atoi_cub.c \
 		get_next_line.c \
 		main.c \
 		ft_fencing.c \
-		ft_init.c
+		ft_init.c \
+		ft_sprites.c \
+		ft_keys.c \
+		ft_raycasting_moves.c
 
 OBJS_DIR = objs/
 

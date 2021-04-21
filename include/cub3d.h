@@ -22,7 +22,7 @@
 
 typedef struct  s_data {
     void        *img;
-    char        *addr;
+    int         *addr;
     int         bits_per_pixel;
     int         line_length;
     int         endian;
@@ -36,6 +36,8 @@ typedef struct  s_data {
     int         right;
     int         rotate_right;
     int         rotate_left;
+    int	   			width;
+	  int		   		height;
 }               t_data;
 
 typedef struct  s_ray
@@ -57,8 +59,8 @@ typedef struct  s_ray
     double sidedistx;
     double sidedisty;
     //what direction to step in x or y-direction (either +1 or -1)
-    int stepX;
-    int stepY;
+    int stepx;
+    int stepy;
     int hit; //was there a wall hit?
     int side; //was a NS or a EW wall hit?
     int x; // l'indice de la colone a afficher sur l'ecran (ou la position du trace)
@@ -86,6 +88,18 @@ typedef struct  s_sprite
   int       numspr;
   int				*order;
 	double		*dist;
+  double    spritex;
+  double    spritey;
+  double    invdet;
+  int				spritescreenx;
+	int				spriteheight;
+  double		transformx;
+	double		transformy;
+  int				drawstartx;
+	int				drawstarty;
+	int				drawendy;
+	int				drawendx;
+	int				spritewidth;
 }               t_sprite;
 
 typedef struct  s_sxy
@@ -148,6 +162,29 @@ void ft_dda(t_get *get);
 void ft_init_texture(t_get *get);
 int ft_key_press(int keycode, t_get *get);
 int ft_key_release(int keycode, t_get *get);
+void ft_draw_sprite(t_get *get, int y, int texx, int stripe);
+void ft_sprite(t_get *get);
+void ft_sprite_aux(t_get *get);
+void ft_dist_order(t_get *get);
+void ft_order_sprites(t_get *get);
+void ft_forward_back(t_get *get);
+void ft_left_right(t_get *get);
+void	ft_rotate_right_left(t_get *get);
+void	ft_rotate_left(t_get *get, double olddirx, double oldplanx);
+void ft_draw_color(t_get *get);
+void ft_draw(t_get *get, int y);
+int ft_raycasting(t_get *get);
+int ft_mlx(t_get *get);
+void ft_dist(t_get *get);
+void ft_mlx_win_img(t_get *get);
+void ft_init_sprites(t_get *get);
+void	ft_init_sprite2(t_get *get, int i, int j, int s);
+void ft_init_raycasting2(t_get *get);
+void	ft_init_dir(t_get *get);
+void ft_init_raycasting(t_get *get);
+void ft_get_texture_addr(t_get *get);
+void ft_get_texture(t_get *get);
+int		ft_exit(t_get *get);
 /* get_next_line functions */
 int		get_next_line(const int fd, char **line, t_get *get);
 char	*ft_strsub(char const *s, unsigned int start, size_t len);
@@ -175,7 +212,7 @@ int ft_map(t_get *get, char *str, int *i);
 int ft_is_map(char *str);
 void ft_copy_map_aux(char *str, char *map);
 void ft_verify(t_get *get);
-void ft_mlx_win_img(t_get *get, t_data *mlx);
+//void ft_mlx_win_img(t_get *get, t_data *mlx);
 int		ft_create_rgb(int a, int r, int g, int b);
 int ft_strlen2(char *str);
 char *ft_get_path(char *str, int *i, t_get *get);

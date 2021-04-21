@@ -198,3 +198,22 @@ void ft_error(t_get *get, char *str)
 		free(get->map);
   exit(0);
 }
+
+int		ft_exit(t_get *get)
+{
+	if (get->mlx.img)
+		mlx_destroy_image(get->mlx.ptr, get->mlx.img);
+	if (get->textures[0].img)
+		mlx_destroy_image(get->mlx.ptr, get->textures[0].img);
+	if (get->textures[1].img)
+		mlx_destroy_image(get->mlx.ptr, get->textures[1].img);
+	if (get->textures[2].img)
+		mlx_destroy_image(get->mlx.ptr, get->textures[2].img);
+	if (get->textures[3].img)
+		mlx_destroy_image(get->mlx.ptr, get->textures[3].img);
+	if (get->textures[4].img)
+		mlx_destroy_image(get->mlx.ptr, get->textures[4].img);
+	if (get->mlx.mlx_win)
+		mlx_destroy_window(get->mlx.ptr, get->mlx.mlx_win);
+	exit(0);
+}

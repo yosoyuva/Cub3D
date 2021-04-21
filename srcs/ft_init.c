@@ -31,18 +31,18 @@ void ft_init_raycasting(t_get *get)
   get->ray.diry = 0;
   get->ray.planx = 0;
   get->ray.plany = 0;
-  get->data.forward = 0;
-	get->data.back = 0;
-	get->data.left = 0;
-	get->data.right = 0;
-	get->data.rotate_right = 0;
-	get->data.rotate_left = 0;
-  if (!(get->s.zbuffer = (double *)malloc(sizeof(double) * get->rx)))
+  get->mlx.forward = 0;
+	get->mlx.back = 0;
+	get->mlx.left = 0;
+	get->mlx.right = 0;
+	get->mlx.rotate_right = 0;
+	get->mlx.rotate_left = 0;
+  if (!(get->sprite.zbuffer = (double *)malloc(sizeof(double) * get->rx)))
 		ft_error(get, "malloc zbuffer");
   ft_init_dir(get);
 }
 
-void	ft_init_dir(t_recup *get)
+void	ft_init_dir(t_get *get)
 {
   /* fov = (2 * atan(0.66/1.0)) = 66 degres */
 	if (get->depart == 'N')
@@ -84,7 +84,7 @@ void ft_init_deltas(t_get *get)
     (get->ray.raydirx * get->ray.raydirx));
   else
     get->ray.deltadistx = 1;
-  if (get->ray>raydiry != 0)
+  if (get->ray.raydiry != 0)
     get->ray.deltadisty = sqrt(1 + (get->ray.raydirx * get->ray.raydirx) / \
     (get->ray.raydiry * get->ray.raydiry));
   else
@@ -124,7 +124,7 @@ void ft_init_texture(t_get *get)
 	if (get->ray.side == 1 && get->ray.raydiry < 0)
 		get->text.texface = 2;
 	if (get->ray.side == 1 && get->ray.raydiry >= 0)
-		recup->t.texdir = 3;
+		get->text.texface = 3;
   /* voir page 10/11 du rocket */
   if (get->ray.side == 0)
     get->text.wallx = get->ray.posy + get->ray.perpwalldist * get->ray.raydiry;
@@ -138,16 +138,18 @@ void ft_init_sprites(t_get *get)
   int i;
 	int j;
 
-	i = -1;
+	i = 0;
 	get->sprite.numspr = 0;
-	while (++i < get->nblines)
+	while (i < get->nblines)
 	{
-		j = -1;
-		while (++j < get->sizeline)
+		j = 0;
+		while (j < get->linesize)
 		{
 			if (get->map[i][j] == '2')
 				get->sprite.numspr += 1;
+      j++;
 		}
+    i++;
 	}
 	if (!(get->sxy = (t_sxy *)malloc(sizeof(t_sxy) * get->sprite.numspr)))
 		ft_error(get, "Malloc sxy*");
@@ -160,11 +162,10 @@ void ft_init_sprites(t_get *get)
 
 void	ft_init_sprite2(t_get *get, int i, int j, int s)
 {
-	i = i - 1;
-	while (++i < get->nblines)
+	while (i < get->nblines)
 	{
-		j = -1;
-		while (++j < get->sizeline)
+		j = 0;
+		while (j < get->linesize)
 		{
 			if (get->map[i][j] == '2')
 			{
@@ -172,6 +173,8 @@ void	ft_init_sprite2(t_get *get, int i, int j, int s)
 				get->sxy[s].y = (double)j + 0.5;
 				s++;
 			}
+      j++;
 		}
+    i++;
 	}
 }
