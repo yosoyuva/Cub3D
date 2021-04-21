@@ -190,6 +190,7 @@ int ft_cub3d(char *str, t_get *get)
 	//printf("NO = %s, SO = %s, EA = %s, WE = %s, S = %s, rx = %d, ry = %d, F = %d, C = %d\n", get->no, get->so, get->ea, get->we, get->s, get->rx, get->ry, get->f, get->c);
   ft_printf_map(get);
   ft_get_depart(get);
+  ft_raycasting(get);
   return (1);
 }
 
