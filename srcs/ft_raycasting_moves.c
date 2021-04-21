@@ -53,16 +53,34 @@ void	ft_rotate_right_left(t_get *get)
 
 	oldplanx = get->ray.planx;
 	olddirx = get->ray.dirx;
+  /* on multiplie les vecteurs par la matrice de rotation */
 	if (get->data.rotate_right == 1)
 	{
-		get->ray.dirx = get->ray.dirx * cos(-get->ray.rotspeed / 2) -
-			get->ray.diry * sin(-get->ray.rotspeed / 2);
-		get->ray.diry = olddirx * sin(-get->ray.rotspeed / 2) +
-			get->ray.diry * cos(-get->ray.rotspeed / 2);
-		get->ray.planx = get->ray.planx * cos(-get->ray.rotspeed / 2)
-			- get->ray.plany * sin(-get->ray.rotspeed / 2);
-		get->ray.plany = oldplanx * sin(-get->ray.rotspeed / 2) +
-			get->ray.plany * cos(-get->ray.rotspeed / 2);
+		get->ray.dirx = get->ray.dirx * cos(-get->ray.rotspeed) -
+			get->ray.diry * sin(-get->ray.rotspeed);
+		get->ray.diry = olddirx * sin(-get->ray.rotspeed) +
+			get->ray.diry * cos(-get->ray.rotspeed);
+		get->ray.planx = get->ray.planx * cos(-get->ray.rotspeed)
+			- get->ray.plany * sin(-get->ray.rotspeed);
+		get->ray.plany = oldplanx * sin(-get->ray.rotspeed) +
+			get->ray.plany * cos(-get->ray.rotspeed);
 	}
 	ft_rotate_left(get, olddirx);
+}
+
+void	ft_rotate_left(t_get *get, double olddirx, double oldplanx)
+{
+	if (get->data.rotate_left == 1)
+	{
+		olddirx = get->ray.dirx;
+		oldplanx = get->ray.planx;
+		get->ray.dirx = get->ray.dirx * cos(get->ray.rotspeed) -
+			get->ray.diry * sin(get->ray.rotspeed);
+		get->ray.diry = olddirx * sin(get->ray.rotspeed) + get->
+			ray.diry * cos(get->ray.rotspeed);
+		get->ray.planx = get->ray.planx * cos(get->ray.rotspeed) -
+			get->ray.plany * sin(get->ray.rotspeed);
+		get->ray.plany = oldplanx * sin(get->ray.rotspeed) +
+			get->ray.plany * cos(get->ray.rotspeed);
+	}
 }

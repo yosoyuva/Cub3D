@@ -7,6 +7,7 @@ int ft_mlx(t_get *get)
   //t_mystruct mystruct;
 
   get->mlx.i = 1;
+  ft_init_sprites(get);
   ft_init_raycasting(get);
   if (!(get->mlx.ptr = mlx_init()))// Connecting to the minilibx and save the ID connection to mlx_ptr
     ft_error(get, "Mlx initialization failed\n");
@@ -36,8 +37,10 @@ void ft_raycasting(t_get *get)
     ft_init_raycasting2(get);
     ft_dda(get);
     ft_draw_color(get);
+    get->sprite.zbuffer[get->ray.x] = get->ray.perpwalldist;
     (get->ray.x)++;
   }
+  ft_sprites(get);
   ft_forward_back(get);
 	ft_left_right(get);
   ft_rotate_right_left(get);

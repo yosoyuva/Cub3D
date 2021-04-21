@@ -37,6 +37,8 @@ void ft_init_raycasting(t_get *get)
 	get->data.right = 0;
 	get->data.rotate_right = 0;
 	get->data.rotate_left = 0;
+  if (!(get->s.zbuffer = (double *)malloc(sizeof(double) * get->rx)))
+		ft_error(get, "malloc zbuffer");
   ft_init_dir(get);
 }
 
@@ -70,7 +72,7 @@ void ft_init_raycasting2(t_get *get)
   get->ray.mapy = (int)get->ray.posy;
   get->ray.hit = 0;
   get->ray.movespeed = 0.1;
-  get->ray.rotspeed = /*0.033 * 1.8*/;
+  get->ray.rotspeed = 0.1;
   ft_init_deltas(get);
   ft_sidedist_step(get);
 }
@@ -129,4 +131,47 @@ void ft_init_texture(t_get *get)
   else
     get->text.wallx = get->ray.posx + get->ray.perpwalldist * get->ray.raydirx;
   get->text.wallx -= floor((get->text.wallx));
+}
+
+void ft_init_sprites(t_get *get)
+{
+  int i;
+	int j;
+
+	i = -1;
+	get->sprite.numspr = 0;
+	while (++i < get->nblines)
+	{
+		j = -1;
+		while (++j < get->sizeline)
+		{
+			if (get->map[i][j] == '2')
+				get->sprite.numspr += 1;
+		}
+	}
+	if (!(get->sxy = (t_sxy *)malloc(sizeof(t_sxy) * get->sprite.numspr)))
+		ft_error(get, "Malloc sxy*");
+	if (!(get->sprite.order = (int *)malloc(sizeof(int) * get->sprite.numspr)))
+		ft_error(get, "Malloc sprite.order*");
+	if (!(get->sprite.dist = (double *)malloc(sizeof(double) * get->sprite.numspr)))
+		ft_error(get, "Malloc sprite.dist*");
+	ft_init_sprite2(get, 0, 0, 0);
+}
+
+void	ft_init_sprite2(t_get *get, int i, int j, int s)
+{
+	i = i - 1;
+	while (++i < get->nblines)
+	{
+		j = -1;
+		while (++j < get->sizeline)
+		{
+			if (get->map[i][j] == '2')
+			{
+				get->sxy[s].x = (double)i + 0.5;
+				get->sxy[s].y = (double)j + 0.5;
+				s++;
+			}
+		}
+	}
 }

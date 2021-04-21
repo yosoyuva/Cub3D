@@ -78,7 +78,21 @@ typedef struct s_text
   int texx;
   double step;
   double texpos;
-}
+}               t_text;
+
+typedef struct  s_sprite
+{
+  double    *zbuffer;
+  int       numspr;
+  int				*order;
+	double		*dist;
+}               t_sprite;
+
+typedef struct  s_sxy
+{
+  double x;
+  double y;
+}               t_sxy;
 
 typedef struct  s_get
 {
@@ -110,6 +124,8 @@ typedef struct  s_get
     t_ray ray;
     t_data mlx;
     t_text text;
+    t_sprite sprite;
+    t_sxy    *sxy;
 }               t_get;
 
 /* get_next_line struct */
