@@ -118,6 +118,7 @@ void ft_draw(t_get *get, int y)
     ft_putstr("2271\n");
 		get->text.texpos += get->text.step;
     ft_putstr("2272\n");
+    printf("\nA = %d, B = %d, text.texface = %d, texx = %d, line_length = %d, texy = %d, y = %d, wallx = %f\n", y * get->rx + get->ray.x , y * get->mlx.line_length / 4 + get->ray.x, get->text.texface, get->text.texx, get->textures[get->text.texface].line_length, get->text.texy, y, get->text.wallx);
 		if (y < get->ry && get->ray.x < get->rx)
 			get->mlx.addr[y * get->rx + get->ray.x] =
 				get->textures[get->text.texface].addr[get->text.texy *
@@ -154,6 +155,7 @@ void ft_dda(t_get *get)
 void ft_dist(t_get *get)
 {
   /* preuve par thalles */
+  printf("mapx = %d, mapy = %d, stepx = %d, stepy = %d\n", get->ray.mapx, get->ray.mapy, get->ray.stepx, get->ray.stepy);
   if (get->ray.side == 0)
     get->ray.perpwalldist = (get->ray.mapx - get->ray.posx + \
       (1 - get->ray.stepx) / 2) / get->ray.raydirx;

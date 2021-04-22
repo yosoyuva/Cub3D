@@ -21,6 +21,13 @@ void ft_init(t_get *get)
   get->screen_ry = 0;
   get->dx = 0;
   get->dy = 0;
+  get->mlx.img = NULL;
+  get->textures[0].img = NULL;
+	get->textures[1].img = NULL;
+	get->textures[2].img = NULL;
+	get->textures[3].img = NULL;
+	get->textures[4].img = NULL;
+	get->mlx.win = NULL;
 }
 
 void ft_init_raycasting(t_get *get)
@@ -68,6 +75,7 @@ void ft_init_raycasting2(t_get *get)
   get->ray.camerax = 2 * (double)get->ray.x / (double)get->rx - 1;
   get->ray.raydirx = get->ray.dirx + get->ray.planx * get->ray.camerax;
   get->ray.raydiry = get->ray.diry + get->ray.plany * get->ray.camerax;
+  printf("raydirx = %f, raydiry = %f\n", get->ray.raydirx, get->ray.raydiry);
   get->ray.mapx = (int)get->ray.posx;
   get->ray.mapy = (int)get->ray.posy;
   get->ray.hit = 0;
@@ -130,6 +138,7 @@ void ft_init_texture(t_get *get)
     get->text.wallx = get->ray.posy + get->ray.perpwalldist * get->ray.raydiry;
   else
     get->text.wallx = get->ray.posx + get->ray.perpwalldist * get->ray.raydirx;
+  printf("wallx = %f, posy = %f, posx = %f, perpwalldist = %f, raydirx = %f, raydiry = %f\n", get->text.wallx, get->ray.posy, get->ray.posx, get->ray.perpwalldist, get->ray.raydirx, get->ray.raydiry);
   get->text.wallx -= floor((get->text.wallx));
 }
 
