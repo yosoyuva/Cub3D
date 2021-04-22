@@ -121,8 +121,7 @@ void ft_draw(t_get *get, int y)
 		if (y < get->ry && get->ray.x < get->rx)
 			get->mlx.addr[y * get->rx + get->ray.x] =
 				get->textures[get->text.texface].addr[get->text.texy *
-					get->textures[get->text.texface].line_length /
-					4 + get->text.texx];
+					get->textures[get->text.texface].line_length / 4 + get->text.texx];
     ft_putstr("2273\n");
     y++;
   }
