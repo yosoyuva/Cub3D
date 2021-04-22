@@ -7,11 +7,16 @@ int ft_mlx(t_get *get)
   //t_mystruct mystruct;
 
   get->mlx.i = 1;
+  get->c = 2552030;
+  get->f = 338238976;
+  printf("c = %d, f = %d \n", get->c, get->f);
   ft_init_sprites(get);
   ft_init_raycasting(get);
+  printf("init raycasting part\n");
   if (!(get->mlx.ptr = mlx_init()))// Connecting to the minilibx and save the ID connection to mlx_ptr
     ft_error(get, "Mlx initialization failed\n");
   ft_mlx_win_img(get);
+  printf("hook part\n");
 /*  mlx_put_image_to_window(mlx.ptr, mlx.win, mlx.img, 0, 0);
   //mlx_key_hook(mlx_id.mlx_win, esc_hook, &mlx_id);
   //mlx_hook(mlx_id.mlx_win, 5, 1<<, function, param dont a potentielment besoin functiojn)
@@ -31,16 +36,27 @@ int ft_mlx(t_get *get)
 
 int ft_raycasting(t_get *get)
 {
-  get->ray.x = 0;// on initialise
+  get->ray.x = 1024;// on initialise
   while (get->ray.x < get->rx)
   {
+    printf("\nray.x = %d et rx = %d", get->ray.x, get->rx);
+    ft_putstr("he");
     ft_init_raycasting2(get);
+    ft_putstr("1\n");
+    printf(" init");
     ft_dda(get);
+    ft_putstr("2\n");
+    printf(" dda");
     ft_draw_color(get);
+    ft_putstr("3\n");
+    printf(" draw_color ");
     get->sprite.zbuffer[get->ray.x] = get->ray.perpwalldist;
+    printf("zbuffer");
     (get->ray.x)++;
   }
+  printf("boucle while raycasting\n");
   ft_sprite(get);
+  mlx_put_image_to_window(get->mlx.ptr, get->mlx.win, get->mlx.img, 0, 0);
   ft_forward_back(get);
 	ft_left_right(get);
   ft_rotate_right_left(get);
@@ -52,48 +68,66 @@ void ft_draw_color(t_get *get)
   int y;
 
   y = 0;
+  get->ray.drawend = get->ry - get->ray.drawstart;
+  ft_putstr("21\n");
   while (y < get->ray.drawstart)
   {
     get->mlx.addr[y * get->rx + get->ray.x] = get->c;
     y++;
   }
+  ft_putstr("22\n");
   if (y <= get->ray.drawend)
     ft_draw(get, y);
-  y = get->ray.drawend;
+  ft_putstr("23\n");
+  y = get->ray.drawend + 1;
+  ft_putstr("24\n");
   while (y < get->ry)
   {
     get->mlx.addr[y * get->rx + get->ray.x] = get->f;
     y++;
   }
+  ft_putstr("25\n");
 }
 
 void ft_draw(t_get *get, int y)
 {
-  y = get->ray.drawstart - 1;
+  y = get->ray.drawstart;
+  ft_putstr("221\n");
   ft_init_texture(get);
+  ft_putstr("222\n");
   get->text.texx = (int)(get->text.wallx * (double)get->textures
 			[get->text.texface].width);
+    ft_putstr("223\n");
 	if (get->ray.side == 0 && get->ray.raydirx > 0)
 		get->text.texx = get->textures[get->text.texface].width -
 			get->text.texx - 1;
+  ft_putstr("224\n");
 	if (get->ray.side == 1 && get->ray.raydiry < 0)
 		get->text.texx = get->textures[get->text.texface].width -
 			get->text.texx - 1;
+  ft_putstr("225\n");
   get->text.step = 1.0 * get->textures[0].height / get->ray.lineheight;
+  ft_putstr("226\n");
   get->text.texpos = (get->ray.drawstart - get->ry / 2 + \
     get->ray.lineheight / 2) * get->text.texpos;
+  ft_putstr("227\n");
   while (y <= get->ray.drawend)
   {
     get->text.texy = (int)get->text.texpos &
 			(get->textures[get->text.texface].height - 1);
+    ft_putstr("2271\n");
 		get->text.texpos += get->text.step;
+    ft_putstr("2272\n");
 		if (y < get->ry && get->ray.x < get->rx)
-			get->mlx.addr[y * get->mlx.line_length / 4 + get->ray.x] =
+			get->mlx.addr[y * get->rx + get->ray.x] =
 				get->textures[get->text.texface].addr[get->text.texy *
 					get->textures[get->text.texface].line_length /
 					4 + get->text.texx];
+    ft_putstr("2273\n");
     y++;
   }
+  ft_putstr("228\n");
+  printf("c'est bien passe\n");
 }
 
 void ft_dda(t_get *get)
