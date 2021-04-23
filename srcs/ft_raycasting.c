@@ -7,9 +7,10 @@ int ft_mlx(t_get *get)
   //t_mystruct mystruct;
 
   get->mlx.i = 1;
-  get->c = 2552030;
-  get->f = 338238976;
-  printf("c = %d, f = %d \n", get->c, get->f);
+  //get->c = 2552030;
+  //get->f = 338238976;
+  //printf("c = %d, f = %d \n", get->c, get->f);
+  printf("no = %s, so = %s, we = %s, ea = %s, s = %s\n", get->no, get->so, get->we, get->ea, get->s);
   ft_init_sprites(get);
   ft_init_raycasting(get);
   printf("init raycasting part\n");
@@ -98,6 +99,8 @@ void ft_draw(t_get *get, int y)
 {
   y = get->ray.drawstart;
   ft_init_texture(get);
+  get->text.step = 1.0 * get->textures[0].height / get->ray.lineheight;
+//  printf("drawstart = %d, step = %f, drawend = %d\n", get->ray.drawstart, get->text.step, get->ray.drawend);
   get->text.texx = (int)(get->text.wallx * (double)get->textures
 			[get->text.texface].width);
 	if (get->ray.side == 0 && get->ray.raydirx > 0)
@@ -106,9 +109,9 @@ void ft_draw(t_get *get, int y)
 	if (get->ray.side == 1 && get->ray.raydiry < 0)
 		get->text.texx = get->textures[get->text.texface].width -
 			get->text.texx - 1;
-  get->text.step = 1.0 * get->textures[0].height / get->ray.lineheight;
+  //get->text.step = 1.0 * get->textures[0].height / get->ray.lineheight;
   get->text.texpos = (get->ray.drawstart - get->ry / 2 + \
-    get->ray.lineheight / 2) * get->text.texpos;
+    get->ray.lineheight / 2) * get->text.step;
   while (y <= get->ray.drawend)
   {
     get->text.texy = (int)get->text.texpos &
