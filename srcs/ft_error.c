@@ -201,6 +201,7 @@ void ft_error(t_get *get, char *str)
 
 int		ft_exit(t_get *get)
 {
+  printf("dans error\n");
 	if (get->mlx.img)
 		mlx_destroy_image(get->mlx.ptr, get->mlx.img);
 	if (get->textures[0].img)

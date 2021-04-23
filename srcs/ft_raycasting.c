@@ -26,6 +26,11 @@ int ft_mlx(t_get *get)
   mlx_loop_hook(mlx.ptr, render_next_frame, &mlx);*/
   //mlx_loop(get->mlx.ptr);// A loop to keep the connection up
 
+  /*get->mlx.img2 = mlx_new_image(get->mlx.ptr, get->rx, get->ry);
+	get->mlx.addr2 = (int *)mlx_get_data_addr(get->mlx.img2, &get->
+			mlx.bits_per_pixel, &get->mlx.line_length, &get->mlx.endian);*/
+
+
   mlx_hook(get->mlx.win, 33, 1L << 17, ft_exit, get);// destroy windowwhen clicking on the cross
 	mlx_hook(get->mlx.win, 2, 1L << 0, ft_key_press, get);
 	mlx_loop_hook(get->mlx.ptr, ft_raycasting, get);
@@ -36,30 +41,35 @@ int ft_mlx(t_get *get)
 
 int ft_raycasting(t_get *get)
 {
-  get->ray.x = 1024;// on initialise
+  get->ray.x = 0;// on initialise
   while (get->ray.x < get->rx)
   {
-    printf("\nray.x = %d et rx = %d", get->ray.x, get->rx);
-    ft_putstr("he");
     ft_init_raycasting2(get);
-    ft_putstr("1\n");
-    printf(" init");
     ft_dda(get);
-    ft_putstr("2\n");
-    printf(" dda");
     ft_draw_color(get);
-    ft_putstr("3\n");
-    printf(" draw_color ");
     get->sprite.zbuffer[get->ray.x] = get->ray.perpwalldist;
-    printf("zbuffer");
     (get->ray.x)++;
   }
-  printf("boucle while raycasting\n");
+  //printf("boucle while raycasting\n");
   ft_sprite(get);
   mlx_put_image_to_window(get->mlx.ptr, get->mlx.win, get->mlx.img, 0, 0);
   ft_forward_back(get);
 	ft_left_right(get);
   ft_rotate_right_left(get);
+
+
+
+/*  void *tmp;
+
+	tmp = get->mlx.img;
+	get->mlx.img = get->mlx.img2;
+	get->mlx.img2 = tmp;
+	tmp = get->mlx.addr;
+	get->mlx.addr = get->mlx.addr2;
+	get->mlx.addr2 = tmp; */
+
+
+
   return (1);
 }
 
@@ -69,65 +79,47 @@ void ft_draw_color(t_get *get)
 
   y = 0;
   get->ray.drawend = get->ry - get->ray.drawstart;
-  ft_putstr("21\n");
   while (y < get->ray.drawstart)
   {
     get->mlx.addr[y * get->rx + get->ray.x] = get->c;
     y++;
   }
-  ft_putstr("22\n");
   if (y <= get->ray.drawend)
     ft_draw(get, y);
-  ft_putstr("23\n");
   y = get->ray.drawend + 1;
-  ft_putstr("24\n");
   while (y < get->ry)
   {
     get->mlx.addr[y * get->rx + get->ray.x] = get->f;
     y++;
   }
-  ft_putstr("25\n");
 }
 
 void ft_draw(t_get *get, int y)
 {
   y = get->ray.drawstart;
-  ft_putstr("221\n");
   ft_init_texture(get);
-  ft_putstr("222\n");
   get->text.texx = (int)(get->text.wallx * (double)get->textures
 			[get->text.texface].width);
-    ft_putstr("223\n");
 	if (get->ray.side == 0 && get->ray.raydirx > 0)
 		get->text.texx = get->textures[get->text.texface].width -
 			get->text.texx - 1;
-  ft_putstr("224\n");
 	if (get->ray.side == 1 && get->ray.raydiry < 0)
 		get->text.texx = get->textures[get->text.texface].width -
 			get->text.texx - 1;
-  ft_putstr("225\n");
   get->text.step = 1.0 * get->textures[0].height / get->ray.lineheight;
-  ft_putstr("226\n");
   get->text.texpos = (get->ray.drawstart - get->ry / 2 + \
     get->ray.lineheight / 2) * get->text.texpos;
-  ft_putstr("227\n");
   while (y <= get->ray.drawend)
   {
     get->text.texy = (int)get->text.texpos &
 			(get->textures[get->text.texface].height - 1);
-    ft_putstr("2271\n");
 		get->text.texpos += get->text.step;
-    ft_putstr("2272\n");
-    printf("\nA = %d, B = %d, text.texface = %d, texx = %d, line_length = %d, texy = %d, y = %d, wallx = %f\n", y * get->rx + get->ray.x , y * get->mlx.line_length / 4 + get->ray.x, get->text.texface, get->text.texx, get->textures[get->text.texface].line_length, get->text.texy, y, get->text.wallx);
-		if (y < get->ry && get->ray.x < get->rx)
+  	if (y < get->ry && get->ray.x < get->rx)
 			get->mlx.addr[y * get->rx + get->ray.x] =
 				get->textures[get->text.texface].addr[get->text.texy *
 					get->textures[get->text.texface].line_length / 4 + get->text.texx];
-    ft_putstr("2273\n");
     y++;
   }
-  ft_putstr("228\n");
-  printf("c'est bien passe\n");
 }
 
 void ft_dda(t_get *get)
@@ -148,14 +140,14 @@ void ft_dda(t_get *get)
     }
     if (get->map[get->ray.mapx][get->ray.mapy] == '1')
       get->ray.hit = 1;
-    ft_dist(get);
+    //ft_dist(get);
   }
+  ft_dist(get);
 }
 
 void ft_dist(t_get *get)
 {
   /* preuve par thalles */
-  printf("mapx = %d, mapy = %d, stepx = %d, stepy = %d\n", get->ray.mapx, get->ray.mapy, get->ray.stepx, get->ray.stepy);
   if (get->ray.side == 0)
     get->ray.perpwalldist = (get->ray.mapx - get->ray.posx + \
       (1 - get->ray.stepx) / 2) / get->ray.raydirx;

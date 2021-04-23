@@ -4,12 +4,19 @@ void ft_forward_back(t_get *get)
 {
   if (get->mlx.forward == 1)
 	{
+    printf("posy = %f, map[x][y] = %c, posx = %f, dirx = %f, movespeed = %f, X = %d\n", get->ray.posy, get->map[(int)(get->ray.posx + (get->ray.dirx * get->ray.movespeed * 2))][(int)get->ray.posy], get->ray.posx, get->ray.dirx, get->ray.movespeed, (int)(get->ray.posx + (get->ray.dirx * get->ray.movespeed * 2)));
 		if (get->map[(int)(get->ray.posx + (get->ray.dirx * get->
 						ray.movespeed * 2))][(int)get->ray.posy] == '0')
+    {
 			get->ray.posx += get->ray.dirx * get->ray.movespeed;
+      printf("chnage in posx\n");
+    }
 		if (get->map[(int)(get->ray.posx)][(int)(get->ray.posy +
 					(get->ray.diry * get->ray.movespeed * 2))] == '0')
-			get->ray.posy += get->ray.diry * get->ray.movespeed;
+		{
+      get->ray.posy += get->ray.diry * get->ray.movespeed;
+      printf("chnage in posx\n");
+    }
 	}
 	if (get->mlx.back == 1)
 	{

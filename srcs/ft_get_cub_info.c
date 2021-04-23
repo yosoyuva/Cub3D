@@ -182,6 +182,7 @@ void ft_get_depart(t_get *get)
          get->dx = i;
          get->dy = j;
          get->depart = get->map[i][j];
+         get->map[i][j] = '0';
       }
       j++;
     }

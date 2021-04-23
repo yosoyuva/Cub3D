@@ -38,6 +38,10 @@ typedef struct  s_data {
     int         rotate_left;
     int	   			width;
 	  int		   		height;
+
+    void			*img2;
+    int				*addr2;
+
 }               t_data;
 
 typedef struct  s_ray
