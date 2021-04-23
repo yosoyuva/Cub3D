@@ -10,7 +10,7 @@ void ft_draw_sprite(t_get *get, int y, int texx, int stripe)
 		d = (y) * 256 - get->ry * 128 + get->sprite.spriteheight * 128;
 		texy = ((d * get->textures[4].height) / get->sprite.spriteheight) / 256;
 		if (get->textures[4].addr[texy * get->textures[4].line_length / 4 +
-				texx] != -16777216)
+				texx] != 0)
 		{
 			get->mlx.addr[y * get->mlx.line_length / 4 + stripe] =
 				get->textures[4].addr[texy * get->textures[4].line_length /

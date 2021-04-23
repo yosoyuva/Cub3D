@@ -10,7 +10,7 @@ void ft_texture_no(t_get *get, char *read, int *i)
   {
     (*i)++;
     get->no = ft_get_path(read, i, get);
-    printf("***fin get path no***\n");
+    printf("***fin get path no***\nno = %s\n", get->no);
     if (get->no == NULL)
       get->error = 6;
   }

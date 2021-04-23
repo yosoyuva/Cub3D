@@ -186,11 +186,11 @@ void ft_get_texture(t_get *get)
   if (!(get->textures[0].img = mlx_xpm_file_to_image(get->mlx.ptr,
 					get->no, &(get->textures[0].width),
 					&(get->textures[0].height))))
-		ft_error(get, "Texture SO\n");
+		ft_error(get, "Texture NO\n");
 	if (!(get->textures[1].img = mlx_xpm_file_to_image(get->mlx.ptr,
 					get->so, &(get->textures[1].width),
 					&(get->textures[1].height))))
-		ft_error(get, "Texture NO\n");
+		ft_error(get, "Texture SO\n");
 	if (!(get->textures[2].img = mlx_xpm_file_to_image(get->mlx.ptr,
 					get->we, &(get->textures[2].width),
 					&(get->textures[2].height))))
