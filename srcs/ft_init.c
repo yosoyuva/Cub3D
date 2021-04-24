@@ -14,6 +14,7 @@ void ft_init(t_get *get)
   get->s = NULL;
   get->f = -1;
   get->c = -1;
+  get->map = NULL;
   get->comma = 0;
   get->nblines = 0;
   get->linesize = 0;

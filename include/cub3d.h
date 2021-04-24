@@ -154,6 +154,7 @@ struct	s_variables
 	int			ret;
 }		;
 
+int		ft_iswhite_spaces(int *i, const char *str);
 int ft_parsing(char *file, t_get *get);
 void ft_error(t_get *get, char *str);
 int ft_cub3d(char *str, t_get *get);

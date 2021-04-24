@@ -185,23 +185,23 @@ void ft_get_texture(t_get *get)
 {
   if (!(get->textures[0].img = mlx_xpm_file_to_image(get->mlx.ptr,
 					get->no, &(get->textures[0].width),
-					&(get->textures[0].height))))
+					&(get->textures[0].height))) && get->no)
 		ft_error(get, "Texture NO\n");
 	if (!(get->textures[1].img = mlx_xpm_file_to_image(get->mlx.ptr,
 					get->so, &(get->textures[1].width),
-					&(get->textures[1].height))))
+					&(get->textures[1].height))) && get->so)
 		ft_error(get, "Texture SO\n");
 	if (!(get->textures[2].img = mlx_xpm_file_to_image(get->mlx.ptr,
 					get->we, &(get->textures[2].width),
-					&(get->textures[2].height))))
+					&(get->textures[2].height))) && get->ea)
 		ft_error(get, "Texture EA\n");
 	if (!(get->textures[3].img = mlx_xpm_file_to_image(get->mlx.ptr,
 					get->ea, &(get->textures[3].width),
-					&(get->textures[3].height))))
+					&(get->textures[3].height))) && get->we)
 		ft_error(get, "Texture WE\n");
 	if (!(get->textures[4].img = mlx_xpm_file_to_image(get->mlx.ptr,
 					get->s, &(get->textures[4].width),
-					&(get->textures[4].height))))
+					&(get->textures[4].height))) && get->s)
 		ft_error(get, "Texture S\n");
 	ft_get_texture_addr(get);
 }

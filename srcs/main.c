@@ -125,6 +125,7 @@ void ft_parsing_check_errors(char *file, t_get *get)
 	char *read;
 
 	ret = 1;
+  read = NULL;
 	if ((fd = open(file, O_DIRECTORY)) != -1)
 		ft_error(get, "Invalid : is a directory\n");
 	if ((fd = open(file, O_RDONLY)) == -1)
@@ -150,19 +151,25 @@ void ft_parsing_check_errors(char *file, t_get *get)
 			 6)- La description de la map n'est pas forcement carree tant qu'elle est ferme par des murs ca passe
 			 7)- Pour chaque élement, le premier caractère est l’identifiant (un ou deux carac-tères : R, NO, SO, WE, EA, S, F, C), suivi de toutes les informations spécifiques à l’élément dans l'ordre (avec un ou plusieurs espaces entre eux)
 		*/
+    //printf("read = %s\n", read);
 		ft_get_cub_info(get, read);
   //  printf("***8***\n");
+    printf("get cub bien passe\n");
 		free(read);
+    printf("free read bon, ret = %d\n", ret);
 		if (get->error > 0)
 			ft_error(get, "error in getting map info");
     //printf("ret = %d\n", ret);
 	}
   //printf("******\n");
+  printf("boucle ret bien passe\n");
 	close(fd);
+  printf("close fd bon\n");
 	//if(get->nblines == 0 || get->linesize == 0)
 	// ft_error(get, "no map");
 	/* check si la map n'est pas vide */
 	ft_copy_map(file, read, get);
+  printf("copy_map bon\n");
 	//ft_parsing(file, get);
 }
 
@@ -190,6 +197,7 @@ int ft_cub3d(char *str, t_get *get)
 	//printf("NO = %s, SO = %s, EA = %s, WE = %s, S = %s, rx = %d, ry = %d, F = %d, C = %d\n", get->no, get->so, get->ea, get->we, get->s, get->rx, get->ry, get->f, get->c);
   ft_printf_map(get);
   ft_get_depart(get);
+  printf("get depart bon\n");
   ft_mlx(get);
   return (1);
 }

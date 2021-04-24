@@ -9,6 +9,15 @@ int		ft_iswhite_space(int *i, const char *str)
 	return (*i);
 }
 
+int		ft_iswhite_spaces(int *i, const char *str)
+{
+	if (str[*i] == ' ' || str[*i] == '\f' ||
+			str[*i] == '\n' || str[*i] == '\r' ||
+			str[*i] == '\t' || str[*i] == '\v')
+		return (1);
+	return (0);
+}
+
 int		ft_iswhite_space_n_out(int *i, const char *str)
 {
 	while (str[*i] == ' ' || str[*i] == '\f' ||

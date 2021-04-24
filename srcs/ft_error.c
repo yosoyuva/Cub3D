@@ -10,26 +10,34 @@ int ft_n_player(t_get *get)
   int i;
   int j;
   int pos;
+  //int a;
 
   i = 0;
   j = 0;
   pos = 0;
-//  printf("***9***\n");
+  printf("***9***\n");
+  //a = 0;
+  //printf("linezsize = %d, nbline = %d, map = %s, map[14][0] = %c\n", get->linesize, get->nblines, get->map[14], get->map[14][0]);
+  /*while (get->map[a])
+  {
+    printf("%s      a = %d\n", get->map[a], a);
+    a++;
+  }*/
   while (get->map[i])
   {
     j = 0;
-  //  printf("***91***\n");
+    printf("***91***\n");
     while (get->map[i][j])
     {
-    //  printf("***92***\n");
+      printf("***92***\n");
       if ((get->map[i][j] == 'N')  || (get->map[i][j] == 'S') || (get->map[i][j] == 'W') || (get->map[i][j] == 'E'))
         pos++;
-    //  printf("***93***\n");
+      printf("***93***\n");
       j++;
     }
     i++;
   }
-//  printf("***10***\n");
+  printf("***10***\n");
   return (pos);
 }
 
@@ -38,10 +46,10 @@ void ft_verify(t_get *get)
 /* deja fait lors du parsing*/
   //if (ft_walls(get))
   //  ft_error(get, "map is not close");
-//  printf("***8***\n");
+  printf("***8***\n");
   if (ft_n_player(get) != 1)
     ft_error(get, "more or less than one player");
-//  printf("***11***\n");
+  printf("***11***\n");
   if (ft_check_fencing(get) == 0)
     ft_error(get, "map not closed");
 }
@@ -136,12 +144,12 @@ int ft_check_line_fencing(char *str)
       i--;
     if (str[i] != '1')
     {
-      printf("s = %s, str[i] = %c, i = %d, size = %d\n", str, str[i], i, size);
+      //printf("s = %s, str[i] = %c, i = %d, size = %d\n", str, str[i], i, size);
       return (0);
     }
     break ;
   }
-  printf("line = %s, str[i] = %c, i = %d\n", str, str[i], i);
+//  printf("line = %s, str[i] = %c, i = %d\n", str, str[i], i);
   return (1);
 }
 
