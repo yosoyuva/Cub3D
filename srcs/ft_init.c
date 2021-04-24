@@ -3,7 +3,8 @@
 
 void ft_init(t_get *get)
 {
-	get->save = 0;
+	get->mlx.win = NULL;
+  get->save = 0;
   get->map_on = 0;
   get->error = 0;
   get->rx = 0;

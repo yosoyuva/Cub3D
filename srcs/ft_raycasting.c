@@ -17,7 +17,12 @@ int ft_mlx(t_get *get)
   if (!(get->mlx.ptr = mlx_init()))// Connecting to the minilibx and save the ID connection to mlx_ptr
     ft_error(get, "Mlx initialization failed\n");
   ft_mlx_win_img(get);
+  if (get->save)
+  {
+      ft_raycasting(get);
+  }
   printf("hook part\n");
+
 /*  mlx_put_image_to_window(mlx.ptr, mlx.win, mlx.img, 0, 0);
   //mlx_key_hook(mlx_id.mlx_win, esc_hook, &mlx_id);
   //mlx_hook(mlx_id.mlx_win, 5, 1<<, function, param dont a potentielment besoin functiojn)
@@ -46,8 +51,11 @@ int ft_raycasting(t_get *get)
   while (get->ray.x < get->rx)
   {
     ft_init_raycasting2(get);
+    printf("init ray, x = %d\n", get->ray.x);
     ft_dda(get);
+    printf("dda, x = %d\n", get->ray.x);
     ft_draw_color(get);
+    printf("draw, x = %d\n", get->ray.x);
     get->sprite.zbuffer[get->ray.x] = get->ray.perpwalldist;
     (get->ray.x)++;
   }
@@ -55,6 +63,8 @@ int ft_raycasting(t_get *get)
   ft_sprite(get);
   if (get->save == 1)
 		ft_create_bmp(get);
+  if (get->mlx.win == NULL)
+    get->mlx.win = mlx_new_window(get->mlx.ptr, get->rx, get->ry, "Cub3D");// Creating a new window and saving the ID of the window to mlx_window
   mlx_put_image_to_window(get->mlx.ptr, get->mlx.win, get->mlx.img, 0, 0);
   ft_forward_back(get);
 	ft_left_right(get);
@@ -177,10 +187,14 @@ void ft_mlx_win_img(t_get *get)
 	get->ry = (get->ry > get->screen_ry) ? get->screen_ry : get->ry;
   printf("ry = %d\n", get->ry);
   ft_get_texture(get);
-  get->mlx.win = mlx_new_window(get->mlx.ptr, get->rx, get->ry, "Cub3D");// Creating a new window and saving the ID of the window to mlx_window
+  printf("get texture\n");
+  //if (get->save)
+    // ft_raycasting(get);
+  //get->mlx.win = mlx_new_window(get->mlx.ptr, get->rx, get->ry, "Cub3D");// Creating a new window and saving the ID of the window to mlx_window
   get->mlx.img = mlx_new_image(get->mlx.ptr, get->rx, get->ry);
   get->mlx.addr = (int *)mlx_get_data_addr(get->mlx.img, &(get->mlx.bits_per_pixel), &(get->mlx.line_length),
                                 &(get->mlx.endian));
+ // get->mlx.win = mlx_new_window(get->mlx.ptr, get->rx, get->ry, "Cub3D");// Creating a new window and saving the ID of the window to mlx_window
 }
 
 

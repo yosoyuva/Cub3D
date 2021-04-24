@@ -23,7 +23,7 @@ void ft_create_bmp(t_get *get)
 	if ((fd = open("./image.bmp", O_CREAT | O_RDWR)) == -1)
 		ft_error(get, "BMP file creation failed\n");
   system("chmod 777 image.bmp");
-	ft_bmp_header(get, fd);
+  ft_bmp_header(get, fd);
   y = get->ry;
 	while (y >= 0)
 	{
@@ -35,6 +35,7 @@ void ft_create_bmp(t_get *get)
 		}
 		y--;
 	}
+    ft_exit(get);
 }
 
 void ft_bmp_header(t_get *get, int fd)
@@ -42,22 +43,22 @@ void ft_bmp_header(t_get *get, int fd)
   int	tmp;
 
 	write(fd, "BM", 2);
-	tmp = 14 + 40 + 4 * get->rx * get->ry;
+	tmp = 14 + 40 + 4 * get->rx * get->ry; // file size
 	write(fd, &tmp, 4);
 	tmp = 0;
-	write(fd, &tmp, 2);
-	write(fd, &tmp, 2);
-	tmp = 54;
+	write(fd, &tmp, 2);// 2 reserved bytes
+	write(fd, &tmp, 2);//
+	tmp = 54; //combined total value of the bitmap headers in bytes
 	write(fd, &tmp, 4);
-	tmp = 40;
+	tmp = 40; // size of the bitmapinfoheader part
 	write(fd, &tmp, 4);
-	write(fd, &get->rx, 4);
+	write(fd, &get->rx, 4);// image height and width
 	write(fd, &get->ry, 4);
 	tmp = 1;
-	write(fd, &tmp, 2);
+	write(fd, &tmp, 2);//always one (planes)
 	write(fd, &get->mlx.bits_per_pixel, 2);
 	tmp = 0;
-	write(fd, &tmp, 4);
+	write(fd, &tmp, 4);//default
 	write(fd, &tmp, 4);
 	write(fd, &tmp, 4);
 	write(fd, &tmp, 4);
