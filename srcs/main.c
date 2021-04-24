@@ -211,9 +211,9 @@ int main(int ac, char** av)
   t_get get;
 
 	ft_init(&get);
-	if (ac == 2 /*|| (ac == 3 && ft_check_save(av[2]) == 1)*/)
+	if (ac == 2 || (ac == 3 && ft_check_save(av[2])))
 	{
-		if (ac == 3)
+		if (ac == 3 && ft_check_save(av[2]))
 			get.save = 1;
 		ft_cub3d(av[1], &get);
 	}

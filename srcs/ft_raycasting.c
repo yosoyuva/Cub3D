@@ -53,6 +53,8 @@ int ft_raycasting(t_get *get)
   }
   //printf("boucle while raycasting\n");
   ft_sprite(get);
+  if (get->save == 1)
+		ft_create_bmp(get);
   mlx_put_image_to_window(get->mlx.ptr, get->mlx.win, get->mlx.img, 0, 0);
   ft_forward_back(get);
 	ft_left_right(get);

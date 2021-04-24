@@ -233,4 +233,8 @@ int ft_check_fencing_case2(t_get *get);
 int ft_check_fencing_case3(t_get *get);
 int ft_check_fencing_case4(t_get *get);
 int ft_check_high_and_low_fence(char *str1, char *str2);
+/* save */
+int ft_check_save(char *str);
+void ft_create_bmp(t_get *get);
+void ft_bmp_header(t_get *get, int fd);
 #endif
