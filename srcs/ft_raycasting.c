@@ -173,6 +173,7 @@ void ft_mlx_win_img(t_get *get)
   mlx_get_screen_size(get->mlx.ptr, &get->screen_rx, &get->screen_ry);// recupere la resolution de l'ecran
   get->rx = (get->rx > get->screen_rx) ? get->screen_rx : get->rx;
 	get->ry = (get->ry > get->screen_ry) ? get->screen_ry : get->ry;
+  printf("ry = %d\n", get->ry);
   ft_get_texture(get);
   get->mlx.win = mlx_new_window(get->mlx.ptr, get->rx, get->ry, "Cub3D");// Creating a new window and saving the ID of the window to mlx_window
   get->mlx.img = mlx_new_image(get->mlx.ptr, get->rx, get->ry);
@@ -185,23 +186,23 @@ void ft_get_texture(t_get *get)
 {
   if (!(get->textures[0].img = mlx_xpm_file_to_image(get->mlx.ptr,
 					get->no, &(get->textures[0].width),
-					&(get->textures[0].height))) && get->no)
+					&(get->textures[0].height))))
 		ft_error(get, "Texture NO\n");
 	if (!(get->textures[1].img = mlx_xpm_file_to_image(get->mlx.ptr,
 					get->so, &(get->textures[1].width),
-					&(get->textures[1].height))) && get->so)
+					&(get->textures[1].height))))
 		ft_error(get, "Texture SO\n");
 	if (!(get->textures[2].img = mlx_xpm_file_to_image(get->mlx.ptr,
 					get->we, &(get->textures[2].width),
-					&(get->textures[2].height))) && get->ea)
+					&(get->textures[2].height))))
 		ft_error(get, "Texture EA\n");
 	if (!(get->textures[3].img = mlx_xpm_file_to_image(get->mlx.ptr,
 					get->ea, &(get->textures[3].width),
-					&(get->textures[3].height))) && get->we)
+					&(get->textures[3].height))))
 		ft_error(get, "Texture WE\n");
 	if (!(get->textures[4].img = mlx_xpm_file_to_image(get->mlx.ptr,
 					get->s, &(get->textures[4].width),
-					&(get->textures[4].height))) && get->s)
+					&(get->textures[4].height))))
 		ft_error(get, "Texture S\n");
 	ft_get_texture_addr(get);
 }

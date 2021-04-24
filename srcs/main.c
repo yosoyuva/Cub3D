@@ -198,6 +198,10 @@ int ft_cub3d(char *str, t_get *get)
   ft_printf_map(get);
   ft_get_depart(get);
   printf("get depart bon\n");
+  if (get->ry <= 0 || get->rx <= 0)
+    ft_error(get, "Bad resolution");
+  if (get->f == -1 || get->c == -1)
+    ft_error(get, "Bad color");
   ft_mlx(get);
   return (1);
 }

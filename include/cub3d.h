@@ -116,6 +116,7 @@ typedef struct  s_get
 {
     int rx;//resolution
     int ry;
+    int map_on;
     char *no;// chemin vers la texture nord
     char *so;
     char *we;

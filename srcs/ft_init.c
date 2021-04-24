@@ -1,9 +1,10 @@
 #include "../include/cub3d.h"
 
+
 void ft_init(t_get *get)
 {
-	/* on initialise les variables*/
 	get->save = 0;
+  get->map_on = 0;
   get->error = 0;
   get->rx = 0;
   get->ry = 0;
@@ -33,7 +34,7 @@ void ft_init(t_get *get)
 
 void ft_init_raycasting(t_get *get)
 {
-  get->ray.posx = (double)get->dx + 0.5; // pour etre en plein milieu de la case
+  get->ray.posx = (double)get->dx + 0.5;
   get->ray.posy = (double)get->dy + 0.5;
   get->ray.dirx = 0;
   get->ray.diry = 0;

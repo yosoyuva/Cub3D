@@ -2,14 +2,13 @@
 
 void ft_texture_no(t_get *get, char *read, int *i)
 {
-/*if (data de map no NULL)
-    get->error = 6;*/
+  if (get->map_on == 1)
+    ft_error(get, "NO info after map");
   *i = *i + 1;
 //  printf("***7***\n");
   if (get->no == NULL)
   {
-    //(*i)++;
-    *i = *i +2;
+    (*i)++;
     get->no = ft_get_path(read, i, get);
   //  printf("***fin get path no***\nno = %s\n", get->no);
     if (get->no == NULL)
@@ -21,12 +20,12 @@ void ft_texture_no(t_get *get, char *read, int *i)
 
 void ft_texture_so(t_get *get, char *read, int *i)
 {
-  /*if (data de map no NULL)
-      get->error = 6;*/
-  *i = *i + 1;
+  if (get->map_on == 1)
+    ft_error(get, "SO info after map");
+  (*i)++;
   if (get->so == NULL)
   {
-    *i = *i +2;
+    (*i)++;
     get->so = ft_get_path(read, i, get);
     if (get->so == NULL)
       get->error = 5;
@@ -37,12 +36,12 @@ void ft_texture_so(t_get *get, char *read, int *i)
 
 void ft_texture_we(t_get *get, char *read, int *i)
 {
-  /*if (data de map no NULL)
-      get->error = 6;*/
+  if (get->map_on == 1)
+    get->error = 6;
   *i = *i + 1;
   if (get->we == NULL)
   {
-    *i = *i +2;
+    (*i)++;
     get->we = ft_get_path(read, i, get);
     if (get->we == NULL)
       get->error = 4;
@@ -53,12 +52,12 @@ void ft_texture_we(t_get *get, char *read, int *i)
 
 void ft_texture_ea(t_get *get, char *read, int *i)
 {
-  /*if (data de map no NULL)
-      get->error = 6;*/
+  if (get->map_on == 1)
+    get->error = 6;
   *i = *i + 1;
   if (get->ea == NULL)
   {
-    *i = *i +2;
+    (*i)++;
     get->ea = ft_get_path(read, i, get);
     if (get->ea == NULL)
       get->error = 3;
@@ -69,12 +68,11 @@ void ft_texture_ea(t_get *get, char *read, int *i)
 
 void ft_texture_sprite(t_get *get, char *read, int *i)
 {
-  /*if (data de map no NULL)
-      get->error = 6;*/
+  if (get->map_on == 1)
+    get->error = 6;
   if (get->s == NULL)
   {
-    //(*i)++;
-    *i = *i +2;
+    (*i)++;
     get->s = ft_get_path(read, i, get);
     if (get->s == NULL)
       get->error = 10;

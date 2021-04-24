@@ -1,13 +1,5 @@
 #include "../include/cub3d.h"
 
-/*int ft_rest_is_wspace(char *str, int *i)
-{
-  ft_iswhite_space(i, str);
-  if (str[*i])
-    return (0);
-  return (1);
-}*/
-
 void ft_get_cub_info(t_get *get, char *read)
 {
   int i;
@@ -15,14 +7,7 @@ void ft_get_cub_info(t_get *get, char *read)
   i = 0;
   if (read[i])
   {
-  //  printf("***4***\n");
-  //  if (read[i] == '\n')
-  //   break ;
-    //printf("***5***\n");
     ft_iswhite_space(&i, read);
-    //printf("***6***\n");
-    //while (read[i] == ' ')
-    //  i++;
     if (read[i] == 'R')
       ft_resolution(get, read, &i);
     else if (read[i] == 'N' && read[i + 1] == 'O')
@@ -39,7 +24,6 @@ void ft_get_cub_info(t_get *get, char *read)
       ft_color_floor(get, read, &i);
     else if (read[i] == 'C')
       ft_color_ceiling(get, read, &i);
-    /* recuperer les info de la map creer un tableau de tableau que je remplirai ligne par ligne en fonction de ce qui est lu par get_next_line */
     else if (read[i] == '1')
       ft_map(get, read, &i);
     else if (read[i] == '\n' && (get->linesize > 0 || get->nblines > 0))
@@ -49,7 +33,6 @@ void ft_get_cub_info(t_get *get, char *read)
     printf("read = %s\n", read);
     ft_iswhite_space(&i, read);
     printf("read = %s apres iswhitespace\n", read);
-  //  printf("***7***\n");
   }
 }
 
@@ -65,12 +48,13 @@ int ft_is_char_map(char *str, int *i)
   return (1);
 }
 
-/* check si de description de map est conforme (sinon get-error = 2) et recupere le nombre de ligne et la taille de la plus grande*/
+/*
+** check si de description de map est conforme (sinon get-error = 2)
+**et recupere le nombre de ligne et la taille de la plus grande
+*/
 int ft_map(t_get *get, char *str, int *i)
 {
-  //int j;
-
-  //j = 0;
+  get->map_on = 1;
   if (str[*i] != '1')
   {
     get->error = 2;
@@ -83,16 +67,8 @@ int ft_map(t_get *get, char *str, int *i)
   }
   else
     ft_error(get, "non valid char inside line in map");
-  /*if (str[*i] != '\0')
-  {
-   get->error = 2;
-    return (0);
-  }*/
-  printf("ca passe********, str = %s, strlen = %d\n", str, (int)ft_strlen(str));
-  printf("size est bon\n");
   if ((int)ft_strlen(str) > get->linesize)
     get->linesize = ft_strlen(str) + 1;
-  printf("la aussi ca passe \n");
   get->nblines = get->nblines + 1;
   return (1);
 }
@@ -105,42 +81,29 @@ int ft_copy_map(char *file, char *read, t_get *get)
 
   ret = 1;
   i = 0;
-//  printf("***1***\n");
   fd = open(file, O_RDONLY);
-  printf("***2***\n");
   if (!(get->map = malloc(sizeof(char *) * (get->nblines + 1))))
 		return (0);
   ft_bzero(get->map, sizeof(char *) * (get->nblines + 1));
-  printf("***3***\n");
   while (i < get->nblines)
   {
     if (!(get->map[i] = malloc(sizeof(char) * (get->linesize + 1))))
   		return (0);
     ft_bzero(get->map[i], sizeof(char) * (get->linesize + 1));
-    printf("***31***\n");
     i++;
   }
-  printf("***4***\n");
-  //get->map[i - 1][0] = '\0';
-  printf("***5***\n");
   i = 0;
   while (ret != 0)
 	{
 		ret = get_next_line(fd, &read, get);
-    printf("***51***\n");
-    if (ft_is_map(read)/*condition : c'est une ligne de map */)
+    if (ft_is_map(read))
     {
       ft_copy_map_aux(read, get->map[i]);
-      printf("***511***\n");
       i++;
     }
-    printf("***52***\n");
 	}
-  printf("***6***\n");
 	close(fd);
-  printf("***7***\n");
   ft_verify(get);
-  printf("***Fin de copy map***\n");
   return (1);
 }
 

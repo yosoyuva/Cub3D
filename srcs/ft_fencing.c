@@ -62,7 +62,6 @@ int ft_check_fencing_case4(t_get *get)
 
   j = 0;
   i = 2;
-  printf("HEY YO ");
   if (!ft_check_high_and_low_fence(get->map[0], get->map[get->nblines - 1]))
     return (0);
   while (get->map[1][j])
