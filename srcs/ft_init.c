@@ -1,21 +1,21 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_init.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ymehdi <ymehdi@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/04/25 22:03:21 by ymehdi            #+#    #+#             */
+/*   Updated: 2021/04/26 00:04:19 by ymehdi           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../include/cub3d.h"
 
-
-void	ft_init(t_get *get)
+void	ft_init_aux(t_get *get)
 {
-	get->mlx.win = NULL;
-	get->save = 0;
-	get->map_on = 0;
-	get->error = 0;
-	get->rx = 0;
-	get->ry = 0;
-	get->no = NULL;
-	get->so = NULL;
-	get->we = NULL;
-	get->ea = NULL;
-	get->s = NULL;
- 	get->f = -1;
- 	get->c = -1;
+	get->f = -1;
+	get->c = -1;
 	get->map = NULL;
 	get->comma = 0;
 	get->nblines = 0;
@@ -30,7 +30,22 @@ void	ft_init(t_get *get)
 	get->textures[2].img = NULL;
 	get->textures[3].img = NULL;
 	get->textures[4].img = NULL;
+}
+
+void	ft_init(t_get *get)
+{
 	get->mlx.win = NULL;
+	get->save = 0;
+	get->map_on = 0;
+	get->error = 0;
+	get->rx = 0;
+	get->ry = 0;
+	get->no = NULL;
+	get->so = NULL;
+	get->we = NULL;
+	get->ea = NULL;
+	get->s = NULL;
+	ft_init_aux(get);
 }
 
 void	ft_init_raycasting(t_get *get)
@@ -47,9 +62,9 @@ void	ft_init_raycasting(t_get *get)
 	get->mlx.right = 0;
 	get->mlx.rotate_right = 0;
 	get->mlx.rotate_left = 0;
-  if (!(get->sprite.zbuffer = (double *)malloc(sizeof(double) * get->rx)))
+	if (!(get->sprite.zbuffer = (double *)malloc(sizeof(double) * get->rx)))
 		ft_error(get, "malloc zbuffer");
-  ft_init_dir(get);
+	ft_init_dir(get);
 }
 
 void	ft_init_dir(t_get *get)
@@ -84,109 +99,4 @@ void	ft_init_raycasting2(t_get *get)
 	get->ray.rotspeed = 0.1;
 	ft_init_deltas(get);
 	ft_sidedist_step(get);
-}
-
-void	ft_init_deltas(t_get *get)
-{
-	if (get->ray.raydiry == 0)
-		get->ray.deltadistx = 0;
-	else if (get->ray.raydirx != 0)
-		get->ray.deltadistx = sqrt(1 + (get->ray.raydiry * get->ray.raydiry) / \
-    	(get->ray.raydirx * get->ray.raydirx));
-	else
-    	get->ray.deltadistx = 1;
-	if (get->ray.raydirx == 0)
-		get->ray.deltadisty = 0;
-	else if (get->ray.raydiry != 0)
-    	get->ray.deltadisty = sqrt(1 + (get->ray.raydirx * get->ray.raydirx) / \
-    	(get->ray.raydiry * get->ray.raydiry));
-	else
-		get->ray.deltadisty = 1;
-}
-
-void ft_sidedist_step(t_get *get)
-{
-  if (get->ray.raydirx < 0)
-  {
-    get->ray.stepx = -1;
-    get->ray.sidedistx = (get->ray.posx - get->ray.mapx) * get->ray.deltadistx;
-  }
-  else
-  {
-    get->ray.stepx = 1;
-    get->ray.sidedistx = (get->ray.mapx + 1.0 - get->ray.posx) * get->ray.deltadistx;
-  }
-  if (get->ray.raydiry < 0)
-  {
-    get->ray.stepy = -1;
-    get->ray.sidedisty = (get->ray.posy - get->ray.mapy) * get->ray.deltadisty;
-  }
-  else
-  {
-    get->ray.stepy = 1;
-    get->ray.sidedisty = (get->ray.mapy + 1.0 - get->ray.posy) * get->ray.deltadisty;
-  }
-}
-
-void ft_init_texture(t_get *get)
-{
-  if (get->ray.side == 0 && get->ray.raydirx < 0)
-		get->text.texface = 0;
-	if (get->ray.side == 0 && get->ray.raydirx >= 0)
-		get->text.texface = 1;
-	if (get->ray.side == 1 && get->ray.raydiry < 0)
-		get->text.texface = 2;
-	if (get->ray.side == 1 && get->ray.raydiry >= 0)
-	get->text.texface = 3;
-  if (get->ray.side == 0)
-    get->text.wallx = get->ray.posy + get->ray.perpwalldist * get->ray.raydiry;
-  else
-    get->text.wallx = get->ray.posx + get->ray.perpwalldist * get->ray.raydirx;
-  get->text.wallx -= floor((get->text.wallx));
-}
-
-void ft_init_sprites(t_get *get)
-{
-  int i;
-	int j;
-
-	i = 0;
-	get->sprite.numspr = 0;
-	while (i < get->nblines)
-	{
-		j = 0;
-		while (j < get->linesize)
-		{
-			if (get->map[i][j] == '2')
-				get->sprite.numspr += 1;
-      j++;
-		}
-    i++;
-	}
-	if (!(get->sxy = (t_sxy *)malloc(sizeof(t_sxy) * get->sprite.numspr)))
-		ft_error(get, "Malloc sxy*");
-	if (!(get->sprite.order = (int *)malloc(sizeof(int) * get->sprite.numspr)))
-		ft_error(get, "Malloc sprite.order*");
-	if (!(get->sprite.dist = (double *)malloc(sizeof(double) * get->sprite.numspr)))
-		ft_error(get, "Malloc sprite.dist*");
-	ft_init_sprite2(get, 0, 0, 0);
-}
-
-void	ft_init_sprite2(t_get *get, int i, int j, int s)
-{
-	while (i < get->nblines)
-	{
-		j = 0;
-		while (j < get->linesize)
-		{
-			if (get->map[i][j] == '2')
-			{
-				get->sxy[s].x = (double)i + 0.5;
-				get->sxy[s].y = (double)j + 0.5;
-				s++;
-			}
-      j++;
-		}
-    i++;
-	}
 }
