@@ -39,18 +39,18 @@ int	ft_check_fencing_case3(t_get *get)
 	{
 		if (get->map[1][j] != ' ' && get->map[1][j] != '1' && \
 		get->map[1][j] != '\n')
-		{
 			if (get->map[0][j] != ' ' && get->map[0][j] != '1' && \
-			get->map[2][j] == '\0')
+				get->map[2][j] == '\0')
 				return (0);
-		}
 	}
 	j = -1;
 	while (get->map[2][++j])
 	{
-		if (get->map[2][j] != ' ' && get->map[2][j] != '1' && get->map[2][j] != '\n')
+		if (get->map[2][j] != ' ' && get->map[2][j] != '1' && \
+			get->map[2][j] != '\n')
 		{
-			if (get->map[3][j] != ' ' && get->map[3][j] != '1' && get->map[1][j] == '\0')
+			if (get->map[3][j] != ' ' && get->map[3][j] != '1' && \
+				get->map[1][j] == '\0')
 				return (0);
 		}
 	}
