@@ -14,7 +14,7 @@ int		ft_n_player(t_get *get)
 		j = 0;
 		while (get->map[i][j])
 		{
-			if ((get->map[i][j] == 'N')  || (get->map[i][j] == 'S') || \
+			if ((get->map[i][j] == 'N') || (get->map[i][j] == 'S') || \
 				(get->map[i][j] == 'W') || (get->map[i][j] == 'E'))
 				pos++;
 			j++;
@@ -42,7 +42,7 @@ int		ft_check_fencing(t_get *get)
 	if (i < 2)
 		return (0);
 	else if (i == 2 && !ft_check_fencing_case1(get))
-			return (0);
+		return (0);
 	else if (i == 3)
 	{
 		if (!ft_check_fencing_case2(get))
