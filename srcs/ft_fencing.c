@@ -16,9 +16,11 @@ int ft_check_fencing_case2(t_get *get)
     return (0);
   while (get->map[1][i])
   {
-    if (get->map[1][i] != ' ' && get->map[1][i] != '1' && get->map[1][i] != '\n')
+    if (get->map[1][i] != ' ' && get->map[1][i] != '1' && \
+        get->map[1][i] != '\n')
     {
-      if (get->map[0][i] != ' ' && get->map[2][i] != ' ' && get->map[0][i] != '1' && get->map[2][i] != '1')
+      if (get->map[0][i] != ' ' && get->map[2][i] != ' ' && \
+        get->map[0][i] != '1' && get->map[2][i] != '1')
         return (0);
     }
     i++;
@@ -35,9 +37,11 @@ int ft_check_fencing_case3(t_get *get)
     return (0);
   while (get->map[1][j])
   {
-    if (get->map[1][j] != ' ' && get->map[1][j] != '1' && get->map[1][j] != '\n')
+    if (get->map[1][j] != ' ' && get->map[1][j] != '1' && \
+        get->map[1][j] != '\n')
     {
-      if (get->map[0][j] != ' ' && get->map[0][j] != '1' && get->map[2][j] == '\0')
+      if (get->map[0][j] != ' ' && get->map[0][j] != '1' && \
+        get->map[2][j] == '\0')
         return (0);
     }
     j++;
@@ -66,9 +70,11 @@ int ft_check_fencing_case4(t_get *get)
     return (0);
   while (get->map[1][j])
   {
-    if (get->map[1][j] != ' ' && get->map[1][j] != '1' && get->map[1][j] != '\n')
+    if (get->map[1][j] != ' ' && get->map[1][j] != '1' && \
+        get->map[1][j] != '\n')
     {
-      if (get->map[0][j] != ' ' && get->map[0][j] != '1' && get->map[2][j] == '\0')
+      if (get->map[0][j] != ' ' && get->map[0][j] != '1' && \
+        get->map[2][j] == '\0')
         return (0);
     }
     j++;
@@ -76,9 +82,13 @@ int ft_check_fencing_case4(t_get *get)
   j = 0;
   while (get->map[get->nblines - 2][j])
   {
-    if (get->map[get->nblines - 2][j] != ' ' && get->map[get->nblines - 2][j] != '1' && get->map[get->nblines - 2][j] != '\n')
+    if (get->map[get->nblines - 2][j] != ' ' && \
+        get->map[get->nblines - 2][j] != '1' && \
+        get->map[get->nblines - 2][j] != '\n')
     {
-      if (get->map[get->nblines - 1][j] != ' ' && get->map[get->nblines - 1][j] != '1' && get->map[get->nblines - 3][j] == '\0')
+      if (get->map[get->nblines - 1][j] != ' ' && \
+        get->map[get->nblines - 1][j] != '1' && \
+        get->map[get->nblines - 3][j] == '\0')
         return (0);
     }
     j++;
@@ -88,7 +98,8 @@ int ft_check_fencing_case4(t_get *get)
     j = 0;
     while (get->map[i][j])
     {
-      if (get->map[i][j] != ' ' && get->map[i][j] != '1' && get->map[i][j] != '\n')
+      if (get->map[i][j] != ' ' && get->map[i][j] != '1' && \
+        get->map[i][j] != '\n')
       {
         if (get->map[i - 1][j] == '\0' || get->map[i + 1][j] == '\0')
           return (0);

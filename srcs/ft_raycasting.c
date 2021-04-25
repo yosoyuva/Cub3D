@@ -2,42 +2,14 @@
 
 int ft_mlx(t_get *get)
 {
-  //t_mlx_id mlx_id;
-  //t_data mlx;
-  //t_mystruct mystruct;
-
-  get->mlx.i = 1;
-  //get->c = 2552030;
-  //get->f = 338238976;
-  //printf("c = %d, f = %d \n", get->c, get->f);
-  printf("no = %s, so = %s, we = %s, ea = %s, s = %s\n", get->no, get->so, get->we, get->ea, get->s);
   ft_init_sprites(get);
   ft_init_raycasting(get);
-  printf("init raycasting part\n");
-  if (!(get->mlx.ptr = mlx_init()))// Connecting to the minilibx and save the ID connection to mlx_ptr
+  if (!(get->mlx.ptr = mlx_init()))
     ft_error(get, "Mlx initialization failed\n");
   ft_mlx_win_img(get);
   if (get->save)
-  {
       ft_raycasting(get);
-  }
-  printf("hook part\n");
-
-/*  mlx_put_image_to_window(mlx.ptr, mlx.win, mlx.img, 0, 0);
-  //mlx_key_hook(mlx_id.mlx_win, esc_hook, &mlx_id);
-  //mlx_hook(mlx_id.mlx_win, 5, 1<<, function, param dont a potentielment besoin functiojn)
-  hello_bye_mouse(&mlx);
-  mlx.ptr = mlx.ptr;
-  mlx.win = mlx.win;
-  mlx_loop_hook(mlx.ptr, render_next_frame, &mlx);*/
-  //mlx_loop(get->mlx.ptr);// A loop to keep the connection up
-
-  /*get->mlx.img2 = mlx_new_image(get->mlx.ptr, get->rx, get->ry);
-	get->mlx.addr2 = (int *)mlx_get_data_addr(get->mlx.img2, &get->
-			mlx.bits_per_pixel, &get->mlx.line_length, &get->mlx.endian);*/
-
-
-  mlx_hook(get->mlx.win, 33, 1L << 17, ft_exit, get);// destroy windowwhen clicking on the cross
+  mlx_hook(get->mlx.win, 33, 1L << 17, ft_exit, get);
 	mlx_hook(get->mlx.win, 2, 1L << 0, ft_key_press, get);
 	mlx_loop_hook(get->mlx.ptr, ft_raycasting, get);
 	mlx_hook(get->mlx.win, 3, 1L << 1, ft_key_release, get);
@@ -47,42 +19,24 @@ int ft_mlx(t_get *get)
 
 int ft_raycasting(t_get *get)
 {
-  get->ray.x = 0;// on initialise
+  get->ray.x = 0;
   while (get->ray.x < get->rx)
   {
     ft_init_raycasting2(get);
-    printf("init ray, x = %d\n", get->ray.x);
     ft_dda(get);
-    printf("dda, x = %d\n", get->ray.x);
     ft_draw_color(get);
-    printf("draw, x = %d\n", get->ray.x);
     get->sprite.zbuffer[get->ray.x] = get->ray.perpwalldist;
     (get->ray.x)++;
   }
-  //printf("boucle while raycasting\n");
   ft_sprite(get);
   if (get->save == 1)
 		ft_create_bmp(get);
   if (get->mlx.win == NULL)
-    get->mlx.win = mlx_new_window(get->mlx.ptr, get->rx, get->ry, "Cub3D");// Creating a new window and saving the ID of the window to mlx_window
+    get->mlx.win = mlx_new_window(get->mlx.ptr, get->rx, get->ry, "Cub3D");
   mlx_put_image_to_window(get->mlx.ptr, get->mlx.win, get->mlx.img, 0, 0);
   ft_forward_back(get);
 	ft_left_right(get);
   ft_rotate_right_left(get);
-
-
-
-/*  void *tmp;
-
-	tmp = get->mlx.img;
-	get->mlx.img = get->mlx.img2;
-	get->mlx.img2 = tmp;
-	tmp = get->mlx.addr;
-	get->mlx.addr = get->mlx.addr2;
-	get->mlx.addr2 = tmp; */
-
-
-
   return (1);
 }
 
@@ -111,8 +65,6 @@ void ft_draw(t_get *get, int y)
 {
   y = get->ray.drawstart;
   ft_init_texture(get);
-  get->text.step = 1.0 * get->textures[0].height / get->ray.lineheight;
-//  printf("drawstart = %d, step = %f, drawend = %d\n", get->ray.drawstart, get->text.step, get->ray.drawend);
   get->text.texx = (int)(get->text.wallx * (double)get->textures
 			[get->text.texface].width);
 	if (get->ray.side == 0 && get->ray.raydirx > 0)
@@ -121,7 +73,7 @@ void ft_draw(t_get *get, int y)
 	if (get->ray.side == 1 && get->ray.raydiry < 0)
 		get->text.texx = get->textures[get->text.texface].width -
 			get->text.texx - 1;
-  //get->text.step = 1.0 * get->textures[0].height / get->ray.lineheight;
+  get->text.step = 1.0 * get->textures[0].height / get->ray.lineheight;
   get->text.texpos = (get->ray.drawstart - get->ry / 2 + \
     get->ray.lineheight / 2) * get->text.step;
   while (y <= get->ray.drawend)
@@ -145,33 +97,29 @@ void ft_dda(t_get *get)
     {
       get->ray.sidedistx = get->ray.sidedistx + get->ray.deltadistx;
       get->ray.mapx = get->ray.mapx + get->ray.stepx;
-      get->ray.side = 0; // ns
+      get->ray.side = 0;
     }
     else
     {
       get->ray.sidedisty = get->ray.sidedisty + get->ray.deltadisty;
       get->ray.mapy = get->ray.mapy + get->ray.stepy;
-      get->ray.side = 1; // ew
+      get->ray.side = 1;
     }
     if (get->map[get->ray.mapx][get->ray.mapy] == '1')
       get->ray.hit = 1;
-    //ft_dist(get);
   }
   ft_dist(get);
 }
 
 void ft_dist(t_get *get)
 {
-  /* preuve par thalles */
   if (get->ray.side == 0)
     get->ray.perpwalldist = (get->ray.mapx - get->ray.posx + \
       (1 - get->ray.stepx) / 2) / get->ray.raydirx;
   else
     get->ray.perpwalldist = (get->ray.mapy - get->ray.posy + \
       (1 - get->ray.stepy) / 2) / get->ray.raydiry;
-  /* Calculate height of line to draw on screen */
   get->ray.lineheight = (int)(get->ry / get->ray.perpwalldist);
-  /* Calculate lowest and highest pixel to fill in current stripe */
   get->ray.drawstart = get->ry / 2 - get->ray.lineheight / 2;
   if (get->ray.drawstart < 0)
     get->ray.drawstart = 0;
@@ -182,19 +130,14 @@ void ft_dist(t_get *get)
 
 void ft_mlx_win_img(t_get *get)
 {
-  mlx_get_screen_size(get->mlx.ptr, &get->screen_rx, &get->screen_ry);// recupere la resolution de l'ecran
+  mlx_get_screen_size(get->mlx.ptr, &get->screen_rx, &get->screen_ry);
   get->rx = (get->rx > get->screen_rx) ? get->screen_rx : get->rx;
 	get->ry = (get->ry > get->screen_ry) ? get->screen_ry : get->ry;
-  printf("ry = %d\n", get->ry);
   ft_get_texture(get);
-  printf("get texture\n");
-  //if (get->save)
-    // ft_raycasting(get);
-  //get->mlx.win = mlx_new_window(get->mlx.ptr, get->rx, get->ry, "Cub3D");// Creating a new window and saving the ID of the window to mlx_window
+  get->mlx.win = mlx_new_window(get->mlx.ptr, get->rx, get->ry, "Cub3D");
   get->mlx.img = mlx_new_image(get->mlx.ptr, get->rx, get->ry);
   get->mlx.addr = (int *)mlx_get_data_addr(get->mlx.img, &(get->mlx.bits_per_pixel), &(get->mlx.line_length),
                                 &(get->mlx.endian));
- // get->mlx.win = mlx_new_window(get->mlx.ptr, get->rx, get->ry, "Cub3D");// Creating a new window and saving the ID of the window to mlx_window
 }
 
 

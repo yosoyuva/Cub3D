@@ -5,12 +5,10 @@ void ft_texture_no(t_get *get, char *read, int *i)
   if (get->map_on == 1)
     ft_error(get, "NO info after map");
   *i = *i + 1;
-//  printf("***7***\n");
   if (get->no == NULL)
   {
     (*i)++;
     get->no = ft_get_path(read, i, get);
-  //  printf("***fin get path no***\nno = %s\n", get->no);
     if (get->no == NULL)
       get->error = 6;
   }
@@ -88,8 +86,6 @@ char *ft_get_path(char *str, int *i, t_get *get)
 
   j = 0;
   *i = ft_iswhite_space(i, str);
-  //printf("***8***\n");
-  //printf("str[*i] = %c, *i = %d\n", str[*i], *i);
   if (str[*i] == '.' && str[*i + 1] == '/')
   {
     if (!(path = malloc(sizeof(char) * (ft_strlen2(str) + 1))))
@@ -103,7 +99,6 @@ char *ft_get_path(char *str, int *i, t_get *get)
       j++;
     }
     j = 0;
-  //  printf("str = %s, path = %s\n", str, &path[ft_strlen2(str)]);
     while (str[*i] != '\0')
     {
       path[j] = str[*i];
@@ -116,7 +111,6 @@ char *ft_get_path(char *str, int *i, t_get *get)
       path[j] = 0;
       j--;
     }
-  //  printf("path = %s\n", path);
     return (path);
   }
   else
