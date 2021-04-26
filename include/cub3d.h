@@ -19,6 +19,7 @@
 # define RIGHT_D_D		100
 # define LEFT_A_Q		97
 # define ESC_ESC 65307
+//# define malloc(X) NULL
 
 typedef struct  s_data {
     void        *img;
@@ -145,6 +146,10 @@ typedef struct  s_get
     t_text text;
     t_sprite sprite;
     t_sxy    *sxy;
+    int     res;
+    int     r1;
+    int     r2;
+    int     r3;
 }               t_get;
 
 /* get_next_line struct */
@@ -171,7 +176,7 @@ int ft_key_release(int keycode, t_get *get);
 void ft_draw_sprite(t_get *get, int y, int texx, int stripe);
 void ft_sprite(t_get *get);
 void ft_sprite_aux(t_get *get);
-void ft_dist_order(t_get *get);
+void ft_dist_order(t_get *get, int *i_ft_sprite);
 void ft_order_sprites(t_get *get);
 void ft_forward_back(t_get *get);
 void ft_left_right(t_get *get);
@@ -191,6 +196,8 @@ void ft_init_raycasting(t_get *get);
 void ft_get_texture_addr(t_get *get);
 void ft_get_texture(t_get *get);
 int		ft_exit(t_get *get);
+int		ft_is_char_map(char *str, int *i);
+int		ft_atoi_cub_color(t_get *get, char *str, int *i);
 /* get_next_line functions */
 int		get_next_line(const int fd, char **line, t_get *get);
 char	*ft_strsub(char const *s, unsigned int start, size_t len);

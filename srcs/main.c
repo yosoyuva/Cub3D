@@ -6,32 +6,32 @@
 /*   By: ymehdi <ymehdi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/25 22:04:10 by ymehdi            #+#    #+#             */
-/*   Updated: 2021/04/25 22:04:11 by ymehdi           ###   ########.fr       */
+/*   Updated: 2021/04/26 10:50:04 by ymehdi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3d.h"
 
-void ft_printf_map(t_get *get)
+void	ft_printf_map(t_get *get)
 {
-  int i;
+	int		i;
 
-  i = 0;
-  while (get->map[i])
-  {
-    printf("%s\n", get->map[i]);
-    i++;
-  }
+	i = 0;
+	while (get->map[i])
+	{
+		printf("%s\n", get->map[i]);
+		i++;
+	}
 }
 
-void ft_parsing_check_errors(char *file, t_get *get)
+void	ft_parsing_check_errors(char *file, t_get *get)
 {
-	int fd;
-	int ret;
-	char *read;
+	int		fd;
+	int		ret;
+	char	*read;
 
 	ret = 1;
-  read = NULL;
+	read = NULL;
 	if ((fd = open(file, O_DIRECTORY)) != -1)
 		ft_error(get, "Invalid : is a directory\n");
 	if ((fd = open(file, O_RDONLY)) == -1)
@@ -53,9 +53,9 @@ void ft_parsing_check_errors(char *file, t_get *get)
 	ft_copy_map(file, read, get);
 }
 
-int ft_cub3d(char *str, t_get *get)
+int		ft_cub3d(char *str, t_get *get)
 {
-	int			i;
+	int	i;
 
 	i = 0;
 	while (str[i] != '\0')
@@ -73,18 +73,18 @@ int ft_cub3d(char *str, t_get *get)
 		ft_parsing_check_errors(str, get);
 	else
 		ft_error(get, "Map's name invalid\n");
-  ft_get_depart(get);
-  if (get->ry <= 0 || get->rx <= 0)
-    ft_error(get, "Bad resolution");
-  if (get->f == -1 || get->c == -1)
-    ft_error(get, "Bad color");
-  ft_mlx(get);
-  return (1);
+	ft_get_depart(get);
+	if (get->ry <= 0 || get->rx <= 0)
+		ft_error(get, "Bad resolution");
+	if (get->f == -1 || get->c == -1)
+		ft_error(get, "Bad color");
+	ft_mlx(get);
+	return (1);
 }
 
-int main(int ac, char** av)
+int		main(int ac, char **av)
 {
-  t_get get;
+	t_get	get;
 
 	ft_init(&get);
 	if (ac == 2 || (ac == 3 && ft_check_save(av[2])))
@@ -95,8 +95,8 @@ int main(int ac, char** av)
 	}
 	else
 	{
-  	write(1, "Invalid args\n", 12);
-    return (0);
-  }
-  return (1);
+		write(1, "Invalid args\n", 12);
+		return (0);
+	}
+	return (1);
 }

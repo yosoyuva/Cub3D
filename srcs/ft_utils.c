@@ -6,7 +6,7 @@
 /*   By: ymehdi <ymehdi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/25 22:19:20 by ymehdi            #+#    #+#             */
-/*   Updated: 2021/04/25 22:23:39 by ymehdi           ###   ########.fr       */
+/*   Updated: 2021/04/26 10:23:38 by ymehdi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,4 +33,41 @@ int		ft_is_map(char *str)
 	if (str[i] == '1')
 		return (1);
 	return (0);
+}
+
+int		ft_rest_is_wspace(char *str, int *i)
+{
+	int	j;
+
+	j = *i;
+	ft_iswhite_space(&j, str);
+	if (str[j] != '\n' && str[j] != '\0')
+		return (0);
+	return (1);
+}
+
+int		ft_create_rgb(int a, int r, int g, int b)
+{
+	return (a << 24 | r << 16 | g << 8 | b);
+}
+
+int		ft_strlen2(char *str)
+{
+	int	i;
+	int	j;
+
+	j = 0;
+	i = 0;
+	if (!str)
+		return (-1);
+	while (str[i] != '.')
+	{
+		i++;
+	}
+	while (str[i] != '\0')
+	{
+		j++;
+		i++;
+	}
+	return (j);
 }

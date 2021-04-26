@@ -6,7 +6,7 @@
 /*   By: ymehdi <ymehdi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/25 22:21:00 by ymehdi            #+#    #+#             */
-/*   Updated: 2021/04/26 00:12:29 by ymehdi           ###   ########.fr       */
+/*   Updated: 2021/04/26 08:29:25 by ymehdi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,18 @@ int		ft_map(t_get *get, char *str, int *i)
 	return (1);
 }
 
+void	ft_copy_map_aux2(int *i, t_get *get)
+{
+	while (*i < get->nblines)
+	{
+		if (!(get->map[*i] = malloc(sizeof(char) * (get->linesize + 1))))
+			ft_error(get, "malloc map");
+		ft_bzero(get->map[*i], sizeof(char) * (get->linesize + 1));
+		*i = *i + 1;
+	}
+	*i = 0;
+}
+
 int		ft_copy_map(char *file, char *read, t_get *get)
 {
 	int	fd;
@@ -48,16 +60,9 @@ int		ft_copy_map(char *file, char *read, t_get *get)
 	i = 0;
 	fd = open(file, O_RDONLY);
 	if (!(get->map = malloc(sizeof(char *) * (get->nblines + 1))))
-		return (0);
+		ft_error(get, "malloc map");
 	ft_bzero(get->map, sizeof(char *) * (get->nblines + 1));
-	while (i < get->nblines)
-	{
-		if (!(get->map[i] = malloc(sizeof(char) * (get->linesize + 1))))
-			return (0);
-		ft_bzero(get->map[i], sizeof(char) * (get->linesize + 1));
-		i++;
-	}
-	i = 0;
+	ft_copy_map_aux2(&i, get);
 	while (ret != 0)
 	{
 		ret = get_next_line(fd, &read, get);

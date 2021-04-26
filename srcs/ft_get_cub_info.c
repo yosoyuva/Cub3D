@@ -6,7 +6,7 @@
 /*   By: ymehdi <ymehdi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/25 22:03:13 by ymehdi            #+#    #+#             */
-/*   Updated: 2021/04/25 23:37:01 by ymehdi           ###   ########.fr       */
+/*   Updated: 2021/04/26 10:24:47 by ymehdi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,4 +88,33 @@ void	ft_get_depart(t_get *get)
 		}
 		i++;
 	}
+}
+
+char	*ft_get_path(char *str, int *i, t_get *get)
+{
+	char	*path;
+	int		j;
+
+	j = -1;
+	*i = ft_iswhite_space(i, str);
+	if (str[*i] == '.' && str[*i + 1] == '/')
+	{
+		if (!(path = malloc(sizeof(char) * (ft_strlen2(str) + 1))))
+			ft_error(get, "malloc path");
+		while (++j <= ft_strlen2(str))
+			path[j] = 0;
+		j = 0;
+		while (str[*i] != '\0')
+		{
+			path[j] = str[*i];
+			j++;
+			(*i)++;
+		}
+		j--;
+		while (ft_iswhite_spaces(&j, path))
+			path[j--] = 0;
+		return (path);
+	}
+	else
+		return (NULL);
 }

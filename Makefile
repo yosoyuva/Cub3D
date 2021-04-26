@@ -12,7 +12,13 @@ SRCS =	ft_atoi_cub.c \
 		ft_sprites.c \
 		ft_keys.c \
 		ft_raycasting_moves.c \
-		ft_save.c
+		ft_save.c \
+		ft_map.c \
+		ft_utils.c \
+		ft_init_aux.c \
+		ft_fencing_aux.c \
+		ft_mlx.c \
+		ft_color.c
 
 OBJS_DIR = objs/
 
