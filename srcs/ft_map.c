@@ -6,7 +6,7 @@
 /*   By: ymehdi <ymehdi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/25 22:21:00 by ymehdi            #+#    #+#             */
-/*   Updated: 2021/04/26 08:29:25 by ymehdi           ###   ########.fr       */
+/*   Updated: 2021/04/27 05:24:18 by ymehdi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ int		ft_map(t_get *get, char *str, int *i)
 		get->error = 2;
 		return (0);
 	}
+	printf("str = %s\n", str);
 	if (ft_is_char_map(str, i))
 	{
 		if (ft_check_line_fencing(&str[*i]) == 0)
@@ -71,6 +72,7 @@ int		ft_copy_map(char *file, char *read, t_get *get)
 			ft_copy_map_aux(read, get->map[i]);
 			i++;
 		}
+		free(read);
 	}
 	close(fd);
 	ft_verify(get);
@@ -84,9 +86,11 @@ void	ft_copy_map_aux(char *str, char *map)
 	i = 0;
 	while (str[i])
 	{
-		if (str[i] == ' ')
-			map[i] = '1';
-		else
+		/*if (str[i] == ' ')
+		{
+			map[i] = '0';
+		}
+		else*/
 			map[i] = str[i];
 		i++;
 	}

@@ -6,7 +6,7 @@
 /*   By: ymehdi <ymehdi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/25 22:04:10 by ymehdi            #+#    #+#             */
-/*   Updated: 2021/04/26 10:50:04 by ymehdi           ###   ########.fr       */
+/*   Updated: 2021/04/27 00:13:22 by ymehdi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,13 +44,20 @@ void	ft_parsing_check_errors(char *file, t_get *get)
 			free(read);
 			ft_error(get, "error while parsing");
 		}
-		ft_get_cub_info(get, read);
+		ft_get_cub_info(get, read, fd);
 		free(read);
 		if (get->error > 0)
+		{
+			get_next_line(fd, &read, get);
 			ft_error(get, "error in getting map info");
+		}
 	}
 	close(fd);
 	ft_copy_map(file, read, get);
+	ft_printf_map(get);
+//	get->error = 1;
+//	get_next_line(fd, &read, get);
+
 }
 
 int		ft_cub3d(char *str, t_get *get)

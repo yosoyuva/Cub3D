@@ -6,7 +6,7 @@
 /*   By: ymehdi <ymehdi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/25 22:19:20 by ymehdi            #+#    #+#             */
-/*   Updated: 2021/04/26 10:23:38 by ymehdi           ###   ########.fr       */
+/*   Updated: 2021/04/27 00:27:58 by ymehdi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,23 @@
 
 int		ft_is_char_map(char *str, int *i)
 {
-	if (str[*i] != ' ' && str[*i] != '0' && str[*i] != '1' \
+	int	j;
+
+	j = *i;
+	while (!(str[*i] != ' ' && str[*i] != '0' && str[*i] != '1' \
 		&& str[*i] != '2' && str[*i] != 'N' && str[*i] != 'S' \
 		&& str[*i] != 'E' && str[*i] != 'W' && str[*i] != '\n'
-		&& str[*i] != '\t')
+		&& str[*i] != '\t'))
 	{
-		return (0);
+		*i = *i + 1;
+		//return (0);
 	}
-	return (1);
+	if (str[*i] == 0)
+	{
+		*i = j;
+		return (1);
+	}
+	return (0);
 }
 
 int		ft_is_map(char *str)

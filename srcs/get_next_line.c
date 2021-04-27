@@ -6,7 +6,7 @@
 /*   By: ymehdi <ymehdi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/10 21:46:23 by ymehdi            #+#    #+#             */
-/*   Updated: 2021/04/26 10:51:27 by ymehdi           ###   ########.fr       */
+/*   Updated: 2021/04/26 19:56:44 by ymehdi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,8 @@ int		get_next_line(const int fd, char **line, t_get *get)
 
 	if (get->error)
 	{
-		free(red[fd]);
+		//free(red[fd]);
+		ft_strdel(&red[fd]);
 		return (0);
 		//ft_error(get, "can't get next line");
 	}

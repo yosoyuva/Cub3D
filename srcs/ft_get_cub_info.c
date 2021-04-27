@@ -6,7 +6,7 @@
 /*   By: ymehdi <ymehdi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/25 22:03:13 by ymehdi            #+#    #+#             */
-/*   Updated: 2021/04/26 10:24:47 by ymehdi           ###   ########.fr       */
+/*   Updated: 2021/04/26 19:53:04 by ymehdi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int		ft_get_cub_info_aux(t_get *get, char *read, int *i)
 	return (0);
 }
 
-void	ft_get_cub_info(t_get *get, char *read)
+void	ft_get_cub_info(t_get *get, char *read, int fd)
 {
 	int	i;
 
@@ -60,7 +60,12 @@ void	ft_get_cub_info(t_get *get, char *read)
 		else if (read[i] == '\n' && (get->linesize > 0 || get->nblines > 0))
 			ft_error(get, "line feed on map desciption");
 		else
+		{
+			get->error = 1;
+			get_next_line(fd, &read, get);
+			free(read);
 			ft_error(get, "false map");
+		}
 		ft_iswhite_space(&i, read);
 	}
 }

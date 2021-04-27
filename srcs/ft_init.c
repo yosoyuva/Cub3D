@@ -6,7 +6,7 @@
 /*   By: ymehdi <ymehdi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/25 22:03:21 by ymehdi            #+#    #+#             */
-/*   Updated: 2021/04/26 09:46:36 by ymehdi           ###   ########.fr       */
+/*   Updated: 2021/04/26 22:24:39 by ymehdi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,10 @@ void	ft_init_aux(t_get *get)
 	get->textures[2].img = NULL;
 	get->textures[3].img = NULL;
 	get->textures[4].img = NULL;
+	get->sprite.order = NULL;
+	get->sprite.dist = NULL;
+	get->sprite.zbuffer = NULL;
+	get->sxy = NULL;
 }
 
 void	ft_init(t_get *get)

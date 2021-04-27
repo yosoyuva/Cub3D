@@ -6,7 +6,7 @@
 /*   By: ymehdi <ymehdi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/26 08:51:10 by ymehdi            #+#    #+#             */
-/*   Updated: 2021/04/26 08:52:10 by ymehdi           ###   ########.fr       */
+/*   Updated: 2021/04/26 19:35:54 by ymehdi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,10 +32,18 @@ int		ft_mlx(t_get *get)
 void	ft_mlx_win_img(t_get *get)
 {
 	mlx_get_screen_size(get->mlx.ptr, &get->screen_rx, &get->screen_ry);
+	get->rx_save = get->rx;
+	get->ry_save = get->ry;
 	get->rx = (get->rx > get->screen_rx) ? get->screen_rx : get->rx;
 	get->ry = (get->ry > get->screen_ry) ? get->screen_ry : get->ry;
 	ft_get_texture(get);
-	get->mlx.win = mlx_new_window(get->mlx.ptr, get->rx, get->ry, "Cub3D");
+	if (get->save)
+	{
+		get->rx = get->rx_save;
+		get->ry = get->ry_save;
+	}
+	else
+		get->mlx.win = mlx_new_window(get->mlx.ptr, get->rx, get->ry, "Cub3D");
 	get->mlx.img = mlx_new_image(get->mlx.ptr, get->rx, get->ry);
 	get->mlx.addr = (int *)mlx_get_data_addr(get->mlx.img, \
 		&(get->mlx.bits_per_pixel), &(get->mlx.line_length), \

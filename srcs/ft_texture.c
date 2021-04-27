@@ -6,7 +6,7 @@
 /*   By: ymehdi <ymehdi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/25 22:03:57 by ymehdi            #+#    #+#             */
-/*   Updated: 2021/04/26 10:24:53 by ymehdi           ###   ########.fr       */
+/*   Updated: 2021/04/26 20:41:09 by ymehdi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,13 @@
 void	ft_texture_no(t_get *get, char *read, int *i)
 {
 	if (get->map_on == 1)
-		ft_error(get, "NO info after map");
+	{
+		/*get->error = 1;
+		get_next_line(fd, &read, get);
+		free(read);
+		ft_error(get, "NO info after map");*/
+		get->error = 6;
+	}
 	*i = *i + 1;
 	if (get->no == NULL)
 	{
@@ -31,7 +37,13 @@ void	ft_texture_no(t_get *get, char *read, int *i)
 void	ft_texture_so(t_get *get, char *read, int *i)
 {
 	if (get->map_on == 1)
-		ft_error(get, "SO info after map");
+	{
+		/*get->error = 1;
+		get_next_line(fd, &read, get);
+		free(read);
+		ft_error(get, "SO info after map");*/
+		get->error = 6;
+	}
 	(*i)++;
 	if (get->so == NULL)
 	{

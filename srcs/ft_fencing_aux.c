@@ -6,7 +6,7 @@
 /*   By: ymehdi <ymehdi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/25 22:08:13 by ymehdi            #+#    #+#             */
-/*   Updated: 2021/04/25 22:09:16 by ymehdi           ###   ########.fr       */
+/*   Updated: 2021/04/27 05:59:25 by ymehdi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,25 @@ int		ft_check_fencing(t_get *get)
 	return (1);
 }
 
+int		ft_check_line_for_space(char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i])
+	{
+		while (str[i] == ' ')
+			i++;
+		if (str[i] != '1')
+			return (0);
+		while (str[i] && str[i] != ' ')
+			i++;
+		if (str[i] && str[i - 1] != '1')
+			return (0);
+	}
+	return (1);
+}
+
 int		ft_check_line_fencing(char *str)
 {
 	int	i;
@@ -65,5 +84,5 @@ int		ft_check_line_fencing(char *str)
 			return (0);
 		break ;
 	}
-	return (1);
+	return (ft_check_line_for_space(str));
 }

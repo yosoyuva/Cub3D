@@ -26,7 +26,7 @@ LIBFT_A =	libft.a
 
 LIB_DIR = lib/
 
-NAME = Cub3D
+NAME = cub3D
 
 MLX_DIR = minilibx-linux
 
