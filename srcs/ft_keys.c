@@ -6,7 +6,7 @@
 /*   By: ymehdi <ymehdi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/25 22:03:26 by ymehdi            #+#    #+#             */
-/*   Updated: 2021/04/26 00:10:22 by ymehdi           ###   ########.fr       */
+/*   Updated: 2021/04/27 10:04:53 by ymehdi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int	ft_key_press(int keycode, t_get *get)
 	else if (keycode == ROTATE_RIGHT)
 		get->mlx.rotate_right = 1;
 	else if (keycode == ESC_ESC)
-		ft_exit(get);
+		ft_exit_raycasting(get);
 	return (1);
 }
 

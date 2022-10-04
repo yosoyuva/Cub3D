@@ -6,7 +6,7 @@
 /*   By: ymehdi <ymehdi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/25 22:21:00 by ymehdi            #+#    #+#             */
-/*   Updated: 2021/04/27 05:24:18 by ymehdi           ###   ########.fr       */
+/*   Updated: 2021/04/27 08:51:40 by ymehdi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,14 +25,19 @@ int		ft_map(t_get *get, char *str, int *i)
 		get->error = 2;
 		return (0);
 	}
-	printf("str = %s\n", str);
 	if (ft_is_char_map(str, i))
 	{
 		if (ft_check_line_fencing(&str[*i]) == 0)
-			ft_error(get, "non closed line in map");
+		{
+			get->error = 6;
+			return (0);
+		}
 	}
 	else
-		ft_error(get, "non valid char inside line in map");
+	{
+		get->error = 6;
+		return (0);
+	}
 	if ((int)ft_strlen(str) > get->linesize)
 		get->linesize = ft_strlen(str) + 1;
 	get->nblines = get->nblines + 1;
@@ -86,12 +91,7 @@ void	ft_copy_map_aux(char *str, char *map)
 	i = 0;
 	while (str[i])
 	{
-		/*if (str[i] == ' ')
-		{
-			map[i] = '0';
-		}
-		else*/
-			map[i] = str[i];
+		map[i] = str[i];
 		i++;
 	}
 	map[i] = '\0';

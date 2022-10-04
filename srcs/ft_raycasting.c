@@ -6,7 +6,7 @@
 /*   By: ymehdi <ymehdi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/25 22:03:39 by ymehdi            #+#    #+#             */
-/*   Updated: 2021/04/26 19:32:33 by ymehdi           ###   ########.fr       */
+/*   Updated: 2021/04/27 08:50:51 by ymehdi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,6 @@ int		ft_raycasting(t_get *get)
 	ft_sprite(get);
 	if (get->save == 1)
 		ft_create_bmp(get);
-	//if (get->mlx.win == NULL)
-	//	get->mlx.win = mlx_new_window(get->mlx.ptr, get->rx, get->ry, "Cub3D");
 	mlx_put_image_to_window(get->mlx.ptr, get->mlx.win, get->mlx.img, 0, 0);
 	ft_forward_back(get);
 	ft_left_right(get);

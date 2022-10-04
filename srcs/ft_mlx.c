@@ -6,7 +6,7 @@
 /*   By: ymehdi <ymehdi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/26 08:51:10 by ymehdi            #+#    #+#             */
-/*   Updated: 2021/04/26 19:35:54 by ymehdi           ###   ########.fr       */
+/*   Updated: 2021/04/27 10:04:28 by ymehdi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int		ft_mlx(t_get *get)
 	ft_mlx_win_img(get);
 	if (get->save)
 		ft_raycasting(get);
-	mlx_hook(get->mlx.win, 33, 1L << 17, ft_exit, get);
+	mlx_hook(get->mlx.win, 33, 1L << 17, ft_exit_raycasting, get);
 	mlx_hook(get->mlx.win, 2, 1L << 0, ft_key_press, get);
 	mlx_loop_hook(get->mlx.ptr, ft_raycasting, get);
 	mlx_hook(get->mlx.win, 3, 1L << 1, ft_key_release, get);

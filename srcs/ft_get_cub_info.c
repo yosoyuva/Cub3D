@@ -6,7 +6,7 @@
 /*   By: ymehdi <ymehdi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/25 22:03:13 by ymehdi            #+#    #+#             */
-/*   Updated: 2021/04/26 19:53:04 by ymehdi           ###   ########.fr       */
+/*   Updated: 2021/04/27 15:42:57 by ymehdi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int		ft_get_cub_info_aux(t_get *get, char *read, int *i)
 	return (0);
 }
 
-void	ft_get_cub_info(t_get *get, char *read, int fd)
+void	ft_get_cub_info(t_get *get, char *read)
 {
 	int	i;
 
@@ -46,7 +46,7 @@ void	ft_get_cub_info(t_get *get, char *read, int fd)
 	{
 		ft_iswhite_space(&i, read);
 		if (ft_get_cub_info_aux(get, read, &i))
-			i = i;
+			i = i + 0;
 		else if (read[i] == 'E' && read[i + 1] == 'A')
 			ft_texture_ea(get, read, &i);
 		else if (read[i] == 'S' && read[i + 1] != 'O')
@@ -58,14 +58,9 @@ void	ft_get_cub_info(t_get *get, char *read, int fd)
 		else if (read[i] == '1')
 			ft_map(get, read, &i);
 		else if (read[i] == '\n' && (get->linesize > 0 || get->nblines > 0))
-			ft_error(get, "line feed on map desciption");
+			get->error = 10;
 		else
-		{
 			get->error = 1;
-			get_next_line(fd, &read, get);
-			free(read);
-			ft_error(get, "false map");
-		}
 		ft_iswhite_space(&i, read);
 	}
 }
@@ -120,6 +115,5 @@ char	*ft_get_path(char *str, int *i, t_get *get)
 			path[j--] = 0;
 		return (path);
 	}
-	else
-		return (NULL);
+	return (NULL);
 }

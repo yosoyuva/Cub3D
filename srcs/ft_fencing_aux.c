@@ -6,7 +6,7 @@
 /*   By: ymehdi <ymehdi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/25 22:08:13 by ymehdi            #+#    #+#             */
-/*   Updated: 2021/04/27 05:59:25 by ymehdi           ###   ########.fr       */
+/*   Updated: 2021/04/27 12:20:32 by ymehdi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,4 +85,41 @@ int		ft_check_line_fencing(char *str)
 		break ;
 	}
 	return (ft_check_line_for_space(str));
+}
+
+int		ft_check_high_and_low_fence(char *str1, char *str2)
+{
+	int	i;
+
+	i = 0;
+	if (!str1)
+		return (0);
+	while (str1[i])
+	{
+		if (str1[i] != '\n' && str1[i] != ' ' && str1[i] != '1')
+			return (0);
+		i++;
+	}
+	i = 0;
+	if (!str2)
+		return (0);
+	while (str2[i])
+	{
+		if (str2[i] != '\n' && str2[i] != ' ' && str2[i] != '1')
+			return (0);
+		i++;
+	}
+	return (1);
+}
+
+int		ft_condition1(t_get *get, int *j)
+{
+	if (get->map[1][*j] != ' ' && get->map[1][*j] != '1' && \
+		get->map[1][*j] != '\n')
+	{
+		if ((get->map[0][*j] == ' ' || !get->map[0][*j]) || \
+			(get->map[2][*j] == ' ' || !get->map[2][*j]))
+			return (1);
+	}
+	return (0);
 }

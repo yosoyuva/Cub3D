@@ -6,7 +6,7 @@
 /*   By: ymehdi <ymehdi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/25 22:02:43 by ymehdi            #+#    #+#             */
-/*   Updated: 2021/04/26 09:23:58 by ymehdi           ###   ########.fr       */
+/*   Updated: 2021/04/27 10:09:19 by ymehdi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void	ft_create_bmp(t_get *get)
 		}
 		y--;
 	}
-	ft_exit(get);
+	ft_exit_raycasting(get);
 }
 
 /*

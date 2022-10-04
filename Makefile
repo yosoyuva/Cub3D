@@ -18,7 +18,8 @@ SRCS =	ft_atoi_cub.c \
 		ft_init_aux.c \
 		ft_fencing_aux.c \
 		ft_mlx.c \
-		ft_color.c
+		ft_color.c \
+		ft_error_aux.c
 
 OBJS_DIR = objs/
 

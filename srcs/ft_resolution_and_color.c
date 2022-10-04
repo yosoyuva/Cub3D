@@ -6,7 +6,7 @@
 /*   By: ymehdi <ymehdi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/25 22:03:44 by ymehdi            #+#    #+#             */
-/*   Updated: 2021/04/26 09:12:13 by ymehdi           ###   ########.fr       */
+/*   Updated: 2021/04/27 10:37:57 by ymehdi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,16 +78,16 @@ int		ft_atoi_cub_color(t_get *get, char *str, int *i)
 	if (str[*i] == ',')
 		*i = *i + 1;
 	else
-		ft_error(get, "invalide color");
+		return (-1);
 	get->r2 = ft_atoi_cub(str, i);
 	if (str[*i] == ',')
 		*i = *i + 1;
 	else
-		ft_error(get, "invalide color");
+		return (-1);
 	get->r3 = ft_atoi_cub(str, i);
 	if ((get->r1 > 255 || get->r1 < 0 || get->r2 > 255 || get->r2 < 0 || \
 		get->r3 > 255 || get->r3 < 0) && (str[*i] == '\0' || str[*i] == '\n'))
-		ft_error(get, "invalide color");
+		return (-1);
 	get->res = ft_create_rgb(0, get->r1, get->r2, get->r3);
 	return (get->res);
 }

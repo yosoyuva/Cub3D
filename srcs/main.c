@@ -6,23 +6,11 @@
 /*   By: ymehdi <ymehdi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/25 22:04:10 by ymehdi            #+#    #+#             */
-/*   Updated: 2021/04/27 00:13:22 by ymehdi           ###   ########.fr       */
+/*   Updated: 2021/04/27 15:04:57 by ymehdi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3d.h"
-
-void	ft_printf_map(t_get *get)
-{
-	int		i;
-
-	i = 0;
-	while (get->map[i])
-	{
-		printf("%s\n", get->map[i]);
-		i++;
-	}
-}
 
 void	ft_parsing_check_errors(char *file, t_get *get)
 {
@@ -39,12 +27,7 @@ void	ft_parsing_check_errors(char *file, t_get *get)
 	while (ret != 0)
 	{
 		ret = get_next_line(fd, &read, get);
-		if (get->error > 0)
-		{
-			free(read);
-			ft_error(get, "error while parsing");
-		}
-		ft_get_cub_info(get, read, fd);
+		ft_get_cub_info(get, read);
 		free(read);
 		if (get->error > 0)
 		{
@@ -54,10 +37,6 @@ void	ft_parsing_check_errors(char *file, t_get *get)
 	}
 	close(fd);
 	ft_copy_map(file, read, get);
-	ft_printf_map(get);
-//	get->error = 1;
-//	get_next_line(fd, &read, get);
-
 }
 
 int		ft_cub3d(char *str, t_get *get)

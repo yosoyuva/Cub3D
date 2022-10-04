@@ -6,7 +6,7 @@
 /*   By: ymehdi <ymehdi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/25 22:02:55 by ymehdi            #+#    #+#             */
-/*   Updated: 2021/04/26 22:19:55 by ymehdi           ###   ########.fr       */
+/*   Updated: 2021/04/27 10:50:10 by ymehdi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,21 @@ void	ft_verify(t_get *get)
 		ft_error(get, "map not closed");
 }
 
+void	ft_error_aux(t_get *get)
+{
+	if (get->map)
+		free(get->map);
+	if (get->sprite.order)
+		free(get->sprite.order);
+	if (get->sprite.dist)
+		free(get->sprite.dist);
+	if (get->sxy)
+		free(get->sxy);
+	if (get->sprite.zbuffer)
+		free(get->sprite.zbuffer);
+	ft_exit(get);
+}
+
 void	ft_error(t_get *get, char *str)
 {
 	int	i;
@@ -63,25 +78,13 @@ void	ft_error(t_get *get, char *str)
 		free(get->s);
 	if (get->map)
 	{
-		printf("on free la map\n");
 		while (i < get->nblines)
 		{
 			free(get->map[i]);
 			i++;
 		}
-		printf("i = %d\n", i);
 	}
-	if (get->map)
-		free(get->map);
-	if (get->sprite.order)
-		free(get->sprite.order);
-	if (get->sprite.dist)
-		free(get->sprite.dist);
-	if (get->sxy)
-		free(get->sxy);
-	if (get->sprite.zbuffer)
-		free(get->sprite.zbuffer);
-	ft_exit(get);
+	ft_error_aux(get);
 }
 
 int		ft_exit(t_get *get)
